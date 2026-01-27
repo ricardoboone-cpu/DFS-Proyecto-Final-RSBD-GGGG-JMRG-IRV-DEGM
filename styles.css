@@ -1,0 +1,378 @@
+/* ================= Pantalla de Inicio ================= */
+body.inicio {
+    padding-top: 0;
+}
+
+.inicio-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.inicio-container h1 {
+    font-size: 2.5rem;
+}
+
+.opciones {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* ================= Gestor de Tareas ================= */
+body.tareas-body {
+    padding-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.task-app {
+    background: rgba(0,0,0,0.6);
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.task-app h1 {
+    margin-bottom: 20px;
+}
+
+.task-input {
+    display: flex;
+    gap: 10px;
+}
+
+.task-input input {
+    flex: 1;
+    min-height: auto;
+}
+
+.task-input button {
+    width: auto;
+    padding: 10px 20px;
+}
+/* ================= Tareas en línea ================= */
+.tarea-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.tarea-izq {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.tarea-izq input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.tarea-texto {
+    flex: 1;
+    text-align: left;
+    word-break: break-word;
+}
+
+.tarea-botones {
+    display: flex;
+    gap: 10px;
+}
+
+.tarea-botones button {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+}
+/* ================= Tarea Completada ================= */
+.completada .tarea-texto {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+/* ================= Reset ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(90deg, #050c64, #345EE7, #8FA9FF, #345EE7, #050c64);
+    color: white;
+    line-height: 1.6;
+    padding-top: 60px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ================= Header ================= */
+.header {
+    background-image: url(IMGS/FondoXD.avif);
+    background-size: cover;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.header-content {
+    text-align: center;
+    padding: 100px 20px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    max-width: 800px;
+}
+
+/* ================= Barra superior ================= */
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(1,1,46);
+    padding: 10px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.menu .logo img {
+    max-height: 60px;
+    width: auto;
+}
+
+/* ================= Menú hamburguesa ================= */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: white;
+}
+
+/* ================= Navbar ================= */
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    transition: 0.3s;
+}
+
+.navbar a:hover { color: aqua; }
+
+/* ================= Botón Explorar ================= */
+.btn-1 {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 30px;
+    background-color: rgb(25,11,130);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 2px solid white;
+    outline: none;
+    transition: 0.3s;
+}
+
+.btn-1:hover,
+.btn-1:focus {
+    background-color: rgb(52,94,231);
+    border-color: aqua;
+}
+
+/* ================= Secciones ================= */
+.juegos {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.project {
+    margin: 30px auto;
+    max-width: 500px;
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+}
+
+.project:hover { transform: scale(1.05); }
+
+.informacion {
+    padding: 60px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    gap: 40px;
+    text-align: center;
+}
+
+.contacto {
+    padding: 60px 20px;
+    background-color: rgb(14,21,119);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form { max-width: 400px; margin: auto; }
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-height: 50px;
+    resize: vertical;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgb(84,164,255);
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+button:hover { background-color: rgb(52,94,231); }
+
+/* ================= Footer ================= */
+.footer {
+    padding: 30px;
+    text-align: center;
+    border-top: 2px solid aqua;
+    background-color: #111;
+}
+
+.links a { color: white; margin: 0 10px; text-decoration: none; }
+.links a:hover { color: aqua; }
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+
+    .menu-toggle { display: block; }
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        background-color: rgb(1,1,46);
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+
+    .navbar.active { display: flex; }
+
+    .navbar ul {
+        flex-direction: column;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar ul li {
+        width: 100%;
+    }
+
+    .navbar ul li a {
+        display: block;
+        text-align: center;
+        padding: 15px 0;
+        border-top: 1px solid white;
+    }
+
+    .informacion img { max-width: 80%; margin: 0 auto; }
+    form { width: 90%; }
+    
+    .contacto form {
+        width: 100%;
+    }
+}
+/* ================= Gestor de tareas responsive ================= */
+@media (max-width: 600px) {
+
+    .task-app {
+        padding: 25px;
+    }
+
+    .task-input {
+        flex-direction: column;
+    }
+
+    .task-input button {
+        width: 100%;
+    }
+
+    .tarea-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tarea-izq {
+        justify-content: flex-start;
+    }
+
+    .tarea-botones {
+        justify-content: flex-end;
+    }
+    .contador {
+    margin-bottom: 15px;
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+}
+/* ================= Botón Volver a Inicio ================= */
+.btn-volver {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(25, 11, 130, 0.8);
+    color: white;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+.btn-volver:hover {
+    background-color: rgba(52, 94, 231, 0.9);
+    transform: scale(1.1);
+}
