@@ -18,7 +18,11 @@ class Tarea {
 // ================= Gestor de Tareas =================
 class GestorDeTareas {
     constructor() {
-        this.tareas = JSON.parse(localStorage.getItem("tareas")) || [];
+        const tareasGuardadas = JSON.parse(localStorage.getItem("tareas")) || [];
+        
+        this.tareas = tareasGuardadas.map(t =>
+            new Tarea(t.nombre, t.completada)
+        );
     }
 
     agregarTarea(nombre) {
@@ -68,14 +72,18 @@ const renderTareas = () => {
 
         li.innerHTML = `
             <div class="tarea-izq">
-                <input type="checkbox" ${tarea.completada ? "checked" : ""}>
+                <label class="checkbox-personalizado">
+                    <input type="checkbox" ${tarea.completada ? "checked" : ""}>
+                    <span class="checkmark"></span>
+                </label>
                 <span class="tarea-texto">${tarea.nombre}</span>
             </div>
             <div class="tarea-botones">
                 <button class="editar">Editar</button>
                 <button class="eliminar">Eliminar</button>
             </div>
-        `;
+            `;
+
         const pendientes = gestor.tareas.filter(t => !t.completada).length;
         contador.textContent = `Tareas pendientes: ${pendientes}`;
 
