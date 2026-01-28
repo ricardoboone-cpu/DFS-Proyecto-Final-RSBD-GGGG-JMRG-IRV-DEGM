@@ -283,9 +283,17 @@ img {
 /* ================= Secciones ================= */
 .juegos {
     padding: 60px 20px;
-    text-align: center;
+    text-align: center; /* Esto centra el h2 */
+    display: grid;
+    grid-template-columns: 1fr; /* por defecto 1 columna */
+    gap: 40px;
 }
 
+.juegos h2 {
+    grid-column: 1 / -1; /* Hace que el título ocupe toda la fila */
+    text-align: center;   /* Centra el texto */
+    margin-bottom: 30px;
+}
 .project {
     margin: 30px auto;
     max-width: 500px;
@@ -473,5 +481,11 @@ button:hover { background-color: rgb(52,94,231); }
 
     .tarea-texto {
         font-size: 1.05rem;
+    }
+}
+/* ================= Juegos en PC ================= */
+@media (min-width: 992px) {
+    .juegos {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en PC */
     }
 }
