@@ -1,10 +1,15 @@
-const router = require('express').Router()
-const controller = require('../controllers/games.controller')
+const router = require('express').Router();
+const controller = require('../controllers/games.controller');
 
-router.get('/', controller.getGames)
-router.post('/', controller.createGame)
-router.put('/:id', controller.updateGame)
-router.delete('/:id', controller.deleteGame)
+const authMiddleware = require('../middlewares/authMiddleware');
+const adminMiddleware = require('../middlewares/adminMiddleware');
 
-module.exports = router
+// público
+router.get('/', controller.getGames);
 
+// solo admin (Dr. Eggman)
+router.post('/', authMiddleware, adminMiddleware, controller.createGame);
+router.put('/:id', authMiddleware, adminMiddleware, controller.updateGame);
+router.delete('/:id', authMiddleware, adminMiddleware, controller.deleteGame);
+
+module.exports = router;

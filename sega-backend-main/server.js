@@ -1,18 +1,27 @@
-require('dotenv').config() //dotenv para variables de entorno
-const express = require('express') //framework backend
-const mongoose = require('mongoose') //ODM para MongoDB
-const cors = require('cors') //middleware para habilitar CORS
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
-const app = express() //crear la app de express
-app.use(cors()) //habilitar CORS
-app.use(express.json()) //middleware para parsear JSON
+const app = express();
 
-mongoose.connect(process.env.MONGO_URI) //conectar a MongoDB
+app.use(cors());
+app.use(express.json());
+
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Mongo conectado"))
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
-app.use('/api/games', require('./routes/games.routes'))// esto es para las rutas de juegos
+// rutas
+app.use('/api/games', require('./routes/games.routes'));
+
+const authRoutes = require("./routes/auth.routes");
+app.use("/api/auth", authRoutes);
+
+// middleware de errores (SIEMPRE antes del listen)
+const errorMiddleware = require("./middlewares/errorMiddleware");
+app.use(errorMiddleware);
 
 app.listen(3000, () => {
-  console.log("Servidor en http://localhost:3000")
-})
+  console.log("Servidor en http://localhost:3000");
+});
