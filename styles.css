@@ -489,3 +489,28 @@ button:hover { background-color: rgb(52,94,231); }
         grid-template-columns: repeat(2, 1fr); /* 2 columnas en PC */
     }
 }
+/* ================= Header game.html ================= */
+.header-game {
+    background: none; /* sin imagen de fondo */
+    min-height: auto; /* se ajusta al contenido */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 20px; /* espacio para la barra superior */
+}
+
+.header-game .menu {
+    background-color: rgb(1,1,46); /* misma barra superior */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.header-game .logo img {
+    max-height: 60px;
+    width: auto;
+}

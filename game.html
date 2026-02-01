@@ -1,17 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Detalle del Juego</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detalle del Juego</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-    <a href="sega.html" class="btn-volver">⬅ Volver</a>
+<body class="game-body">
 
-    <div id="gameDetail" class="game-detail">
-        <h1>Cargando...</h1>
+  <!-- Header (usa .header-game para que no aparezca FondoXD) -->
+  <header class="header-game">
+    <div class="menu sega">
+      <a href="sega.html" class="logo">
+        <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA" />
+      </a>
+
+      <div class="menu-toggle">☰</div>
+
+      <nav class="navbar">
+        <ul>
+          <li><a href="sega.html#inicio">Inicio</a></li>
+          <li><a href="sega.html#juegos">Juegos</a></li>
+          <li><a href="sega.html#info">Información</a></li>
+          <li><a href="sega.html#contacto">Contacto</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <script src="game.js"></script>
+  <!-- Contenido del juego -->
+  <main class="informacion" style="padding: 40px; text-align: center;">
+    <h1 id="game-title">Cargando juego...</h1>
+
+    <img id="game-image" src="" alt="Imagen del juego"
+         style="max-width: 400px; width: 100%; border-radius: 10px; margin: 20px 0;" />
+
+    <p><strong>Género:</strong> <span id="game-genre">-</span></p>
+    <p><strong>Año:</strong> <span id="game-year">-</span></p>
+
+    <a href="sega.html" class="btn-volver" title="Volver a SEGA">⬅</a>
+  </main>
+
+  <footer class="footer">
+    <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA" />
+    <p>© 2026 SEGA. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="game.js"></script>
 </body>
 </html>
