@@ -12,4 +12,7 @@ router.post('/', authMiddleware, adminMiddleware, controller.createGame);
 router.put('/:id', authMiddleware, adminMiddleware, controller.updateGame);
 router.delete('/:id', authMiddleware, adminMiddleware, controller.deleteGame);
 
+// público: obtener un juego por ID
+router.get('/:id', controller.getGameById);
+
 module.exports = router;
