@@ -216,14 +216,12 @@
 })();
 </script>
 <script>
-/* ===== Protección de página ===== */
+/* ===== Protección admin ===== */
 const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 const btnVolver = document.querySelector(".btn-volver");
 
-if (btnVolver) {
-    if (!loggedUser || loggedUser.role !== "admin") {
-        btnVolver.style.display = "none";
-    }
+if (btnVolver && (!loggedUser || loggedUser.role !== "admin")) {
+    btnVolver.style.display = "none";
 }
 
 /* ===== Botón sesión ===== */
@@ -232,8 +230,17 @@ const dropdown = document.getElementById("user-dropdown");
 const logoutBtn = document.getElementById("logout-btn");
 const switchBtn = document.getElementById("switch-btn");
 
-// Si hay usuario
-if (loggedUser) {
+/* ===== ESTADO SIN USUARIO ===== */
+if (!loggedUser) {
+    loginBtn.textContent = "Iniciar sesión";
+
+    loginBtn.addEventListener("click", () => {
+        window.location.href = "login.html";
+    });
+
+} 
+/* ===== ESTADO CON USUARIO ===== */
+else {
     loginBtn.textContent = loggedUser.username;
 
     loginBtn.addEventListener("click", (e) => {
@@ -241,11 +248,19 @@ if (loggedUser) {
         dropdown.classList.toggle("hidden");
     });
 
+    // Cerrar sesión → NO redirige
     logoutBtn.addEventListener("click", () => {
         localStorage.removeItem("loggedUser");
-        window.location.href = "login.html";
+        dropdown.classList.add("hidden");
+        loginBtn.textContent = "Iniciar sesión";
+
+        // Cambia comportamiento del botón
+        loginBtn.onclick = () => {
+            window.location.href = "login.html";
+        };
     });
 
+    // Cambiar usuario → SÍ redirige
     switchBtn.addEventListener("click", () => {
         localStorage.removeItem("loggedUser");
         window.location.href = "login.html";
