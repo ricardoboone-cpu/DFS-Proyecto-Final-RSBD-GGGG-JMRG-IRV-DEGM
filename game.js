@@ -1,6 +1,6 @@
 // ====== Lista de juegos ======
 const games = [
-  { 
+{ 
     id: "1",
     title: "Sonic Frontiers",
     genre: "Action",
@@ -310,7 +310,26 @@ function loadGame() {
     return;
   }
 
-  const game = games.find(g => g.id === gameId);
+  const staticGame = games.find(g => g.id === gameId);
+
+  // Merge any overrides saved from the editor (localStorage key 'juegos_sega')
+  let game = staticGame;
+  try {
+    const stored = JSON.parse(localStorage.getItem('juegos_sega') || '[]');
+    if (Array.isArray(stored)) {
+      const override = stored.find(s => String(s.id) === String(gameId));
+      if (override) {
+        // If there is a static game, copy its fields then overwrite with override.
+        game = Object.assign({}, staticGame || {}, override);
+      } else if (!staticGame) {
+        // If no static game but an entry exists in storage with that id, use it
+        const storedOnly = stored.find(s => String(s.id) === String(gameId));
+        if (storedOnly) game = Object.assign({}, storedOnly);
+      }
+    }
+  } catch (e) {
+    console.warn('No se pudo leer localStorage para overrides de juegos', e);
+  }
 
   if (!game) {
     titleEl.textContent = "Juego no encontrado";
@@ -322,10 +341,10 @@ function loadGame() {
     descEl.innerHTML = "<p>Información no disponible.</p>";
   } else {
     titleEl.textContent = game.title;
-    genreEl.textContent = game.genre;
-    yearEl.textContent = game.year;
-    imageEl.src = game.image;
-    imageEl.alt = game.title;
+    genreEl.textContent = game.genre || '-';
+    yearEl.textContent = game.year || '-';
+    imageEl.src = game.image || 'IMGS/juegos/default.jpg';
+    imageEl.alt = game.title || '';
 
     // ====== Tráiler ======
     if (game.trailer) {
@@ -430,3 +449,27 @@ if (game.comprar && game.comprar.length) {
 
 // ====== Ejecutar ======
 loadGame();
+
+
+
+// ===== Agregar juegos nuevos desde localStorage ======
+// 1. Buscamos si hay juegos nuevos guardados por el editor
+const juegosNuevos = JSON.parse(localStorage.getItem("juegos_sega")) || [];
+
+// 2. Si encontramos juegos nuevos, los metemos a la lista actual
+juegosNuevos.forEach(nuevoJuego => {
+    // Revisamos si el juego ya existe para no duplicarlo
+    const existe = games.find(g => g.id === nuevoJuego.id);
+    if (!existe) {
+        games.push(nuevoJuego);
+    } else {
+        // Si ya existe (porque lo editaste), actualizamos los datos
+        Object.assign(existe, nuevoJuego);
+    }
+});
+
+// 3. Volvemos a ejecutar la función que dibuja los juegos en pantalla
+// Solo si estamos en la página de sega.html
+if (typeof renderGames === 'function' && document.getElementById("juegos-container")) {
+    renderGames(); 
+}

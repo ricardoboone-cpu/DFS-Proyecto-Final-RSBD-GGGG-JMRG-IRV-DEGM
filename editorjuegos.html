@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Catálogo - SEGA</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos específicos para el editor */
+        .editor-container { padding: 40px; max-width: 1000px; margin: auto; color: white; background: rgba(0,0,0,0.8); border-radius: 15px; margin-top: 50px; }
+        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+        input, textarea { padding: 10px; border-radius: 5px; border: none; margin-top: 5px; }
+        .btn-guardar { background-color: #0063ff; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; }
+        .tabla-juegos { width: 100%; border-collapse: collapse; margin-top: 30px; }
+        .tabla-juegos th, .tabla-juegos td { border: 1px solid #444; padding: 12px; text-align: left; }
+        .btn-del { background: #ff4444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
+        .btn-edit { background: #ffbb33; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; margin-right: 5px; }
+    </style>
+</head>
+<body class="game-body">
+
+    <div class="editor-container">
+        <h1>Editor de Juegos SEGA</h1>
+        
+        <form id="form-juego">
+            <input type="hidden" id="edit-id">
+            <div class="form-group">
+                <label>Título del Juego:</label>
+                <input type="text" id="title" required placeholder="Ej: Sonic Frontiers">
+            </div>
+            <div class="form-group">
+                <label>Género:</label>
+                <input type="text" id="genre" required placeholder="Ej: Action">
+            </div>
+            <div class="form-group">
+                <label>Año:</label>
+                <input type="number" id="year" required>
+            </div>
+            <div class="form-group">
+                <label>URL Imagen Portada:</label>
+                <input type="text" id="image" required placeholder="IMGS/juegos/nombre.avif">
+            </div>
+            <div class="form-group">
+                <label>Descripción:</label>
+                <textarea id="description" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn-guardar" id="btn-submit">Agregar Juego</button>
+            <button type="button" id="btn-cancelar" style="display:none;">Cancelar Edición</button>
+        </form>
+
+        <table class="tabla-juegos">
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Título</th>
+                    <th>Año</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="lista-juegos-admin">
+                </tbody>
+        </table>
+    </div>
+<!-- Botón volver a inicio -->
+<a href="index.html" class="btn-volver" title="Volver al inicio">
+    ⬅
+</a>
+
+    <script>
+        // Lógica de Persistencia (LocalStorage)
+        let juegos = JSON.parse(localStorage.getItem("juegos_sega")) || [];
+
+        const form = document.getElementById("form-juego");
+        const lista = document.getElementById("lista-juegos-admin");
+
+        function guardar() {
+            localStorage.setItem("juegos_sega", JSON.stringify(juegos));
+            render();
+        }
+
+        function render() {
+            lista.innerHTML = "";
+            juegos.forEach(juego => {
+                lista.innerHTML += `
+                    <tr>
+                        <td><img src="${juego.image}" width="50"></td>
+                        <td>${juego.title}</td>
+                        <td>${juego.year}</td>
+                        <td>
+                            <button class="btn-edit" onclick="prepararEdicion('${juego.id}')">Editar</button>
+                            <button class="btn-del" onclick="eliminarJuego('${juego.id}')">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            const id = document.getElementById("edit-id").value || Date.now().toString();
+            const nuevoJuego = {
+                id: id,
+                title: document.getElementById("title").value,
+                genre: document.getElementById("genre").value,
+                year: document.getElementById("year").value,
+                image: document.getElementById("image").value,
+                description: document.getElementById("description").value
+            };
+
+            const index = juegos.findIndex(j => j.id === id);
+            if(index !== -1) juegos[index] = nuevoJuego;
+            else juegos.push(nuevoJuego);
+
+            guardar();
+            form.reset();
+            document.getElementById("edit-id").value = "";
+            document.getElementById("btn-submit").innerText = "Agregar Juego";
+        };
+
+        window.eliminarJuego = (id) => {
+            juegos = juegos.filter(j => j.id !== id);
+            guardar();
+        };
+
+        window.prepararEdicion = (id) => {
+            const juego = juegos.find(j => j.id === id);
+            document.getElementById("edit-id").value = juego.id;
+            document.getElementById("title").value = juego.title;
+            document.getElementById("genre").value = juego.genre;
+            document.getElementById("year").value = juego.year;
+            document.getElementById("image").value = juego.image;
+            document.getElementById("description").value = juego.description;
+            document.getElementById("btn-submit").innerText = "Actualizar Juego";
+        };
+
+        render();
+    </script>
+</body>
+</html>

@@ -155,5 +155,57 @@
     });
 
 </script>
+<script>
+// Añade solo los juegos creados desde el editor (localStorage: 'juegos_sega')
+(function(){
+    const container = document.querySelector('.juegos');
+    if (!container) return;
+
+    function getStored() {
+        try { return JSON.parse(localStorage.getItem('juegos_sega') || '[]'); } catch(e){ return []; }
+    }
+
+    function syncStoredOnly() {
+        const stored = Array.isArray(getStored()) ? getStored() : [];
+        const storedIds = new Set(stored.filter(s=>s && !s.deleted).map(s => String(s.id)));
+
+        // Remove previously appended stored-only articles that are no longer in storage
+        container.querySelectorAll('article.project[data-stored-id]').forEach(a => {
+            const id = a.getAttribute('data-stored-id');
+            if (!storedIds.has(id)) a.remove();
+        });
+
+        // Append missing stored-only games
+        stored.forEach(j => {
+            if (!j || j.deleted) return;
+            const id = String(j.id);
+            // if there's already a static link with that id, skip (don't overwrite static list)
+            if (container.querySelector(`a[href*="game.html?id=${id}"]`) && !container.querySelector(`article.project[data-stored-id="${id}"]`)) {
+                // if a static article exists, do not append a duplicate stored-only article
+                return;
+            }
+
+            // If we already appended this stored-only article, skip
+            if (container.querySelector(`article.project[data-stored-id="${id}"]`)) return;
+
+            const article = document.createElement('article'); article.className = 'project';
+            article.setAttribute('data-stored-id', id);
+            const h3 = document.createElement('h3'); h3.textContent = j.title || 'Sin título';
+            const a = document.createElement('a'); a.href = 'game.html?id=' + encodeURIComponent(id);
+            const img = document.createElement('img'); img.src = j.image || 'IMGS/juegos/default.jpg'; img.alt = j.title || '';
+            a.appendChild(img);
+            article.appendChild(h3); article.appendChild(a);
+            container.appendChild(article);
+        });
+    }
+
+    // initial sync
+    syncStoredOnly();
+
+    // listen for storage changes
+    window.addEventListener('storage', (ev) => { if (ev.key === 'juegos_sega') syncStoredOnly(); });
+
+})();
+</script>
 </body>
 </html>
