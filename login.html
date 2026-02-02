@@ -45,10 +45,10 @@
             localStorage.setItem("loggedUser", JSON.stringify(user));
             if (user.role === "admin") {
                 // Admin puede ir a toda la página
-                window.location.href = "index.html";
+                window.location.href = "salaadmin.html";
             } else {
                 // User normal solo puede ir a sega.html
-                window.location.href = "sega.html";
+                window.location.href = "index.html";
             }
         } else {
             alert("Usuario o contraseña incorrectos");

@@ -521,3 +521,45 @@ button:hover { background-color: rgb(52,94,231); }
     max-height: 60px;
     width: auto;
 }
+/* ===== Botón usuario ===== */
+.user-menu {
+    position: relative;
+}
+
+.btn-user {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background: rgba(0,0,0,0.9);
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2000;
+}
+
+.user-dropdown button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+}
+
+.user-dropdown button:hover {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none;
+}
