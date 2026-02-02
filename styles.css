@@ -60,6 +60,7 @@ body.tareas-body {
     width: auto;
     padding: 10px 20px;
 }
+
 /* ================= Botones Gestor de Tareas ================= */
 /* Botón Editar */
 .tarea-botones .editar {
@@ -114,6 +115,7 @@ body.tareas-body {
     padding: 6px 12px;
     font-size: 0.9rem;
 }
+
 /* ================= Checkbox Personalizado ================= */
 
 .checkbox-personalizado {
@@ -177,6 +179,7 @@ body.tareas-body {
     text-decoration: line-through;
     opacity: 0.6;
 }
+
 /* ================= Reset ================= */
 * {
     margin: 0;
@@ -232,8 +235,11 @@ img {
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
+/* nota: en tu archivo había dos valores distintos para .menu .logo img
+   (60px y 50px). Conservo el *último* valor que tenías (50px) para
+   preservar el comportamiento final en tu proyecto. */
 .menu .logo img {
-    max-height: 60px;
+    max-height: 50px;
     width: auto;
 }
 
@@ -259,6 +265,58 @@ img {
 }
 
 .navbar a:hover { color: aqua; }
+
+/* ===== Botón Usuario (unificado) =====
+   En tu archivo original había varias definiciones de .user-menu/.btn-user.
+   Conservo la última definición (la más específica) para respetar la cascada. */
+.user-menu {
+    position: relative; /* necesario para el dropdown */
+    display: flex;
+    align-items: center; /* asegura que se alinee verticalmente */
+}
+
+.btn-user {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 3001; /* conservo el valor final que tenías */
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Dropdown (única definición consolidada) */
+.user-dropdown {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background: rgba(0,0,0,0.9);
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 3000;
+}
+
+.user-dropdown button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    text-align: left;
+}
+
+.user-dropdown button:hover {
+    color: #3b82f6;
+}
+
+.hidden {
+    display: none;
+}
 
 /* ================= Botón Explorar ================= */
 .btn-1 {
@@ -357,11 +415,12 @@ button:hover { background-color: rgb(52,94,231); }
 .links a { color: white; margin: 0 10px; text-decoration: none; }
 .links a:hover { color: aqua; }
 
-/* ================= Responsive ================= */
+/* ================= Responsive (UNIFICADO) ================= */
 @media (max-width: 768px) {
 
     .menu-toggle { display: block; }
 
+    /* navbar desplegable (mobile) */
     .navbar {
         display: none;
         flex-direction: column;
@@ -390,15 +449,31 @@ button:hover { background-color: rgb(52,94,231); }
         text-align: center;
         padding: 15px 0;
         border-top: 1px solid white;
+        width: 100%; /* asegurar que la línea blanca cubra toda la fila */
+    }
+
+    /* si en mobile quieres que .user-menu esté alineado verticalmente en la barra,
+       esta regla reafirma align-items y comportamiento */
+    .user-menu {
+        order: 0;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        /* width: 100%;  <-- si prefieres que ocupe toda la fila, descomenta */
     }
 
     .informacion img { max-width: 80%; margin: 0 auto; }
     form { width: 90%; }
-    
+
     .contacto form {
         width: 100%;
     }
+
+    .navbar {
+        top: 60px; /* justo debajo de la barra */
+    }
 }
+
 /* ================= Gestor de tareas responsive ================= */
 @media (max-width: 600px) {
 
@@ -433,6 +508,7 @@ button:hover { background-color: rgb(52,94,231); }
 }
 
 }
+
 /* ================= Botón Volver a Inicio ================= */
 .btn-volver {
     position: fixed;
@@ -464,6 +540,7 @@ button:hover { background-color: rgb(52,94,231); }
     background-color: rgba(52, 94, 231, 0.9);
     transform: scale(1.1);
 }
+
 /* ================= Gestor de tareas - Tablet ================= */
 @media (min-width: 768px) and (max-width: 1024px) {
 
@@ -490,12 +567,14 @@ button:hover { background-color: rgb(52,94,231); }
         font-size: 1.05rem;
     }
 }
+
 /* ================= Juegos en PC ================= */
 @media (min-width: 992px) {
     .juegos {
         grid-template-columns: repeat(2, 1fr); /* 2 columnas en PC */
     }
 }
+
 /* ================= Header game.html ================= */
 .header-game {
     background: none; /* sin imagen de fondo */
@@ -521,45 +600,4 @@ button:hover { background-color: rgb(52,94,231); }
     max-height: 60px;
     width: auto;
 }
-/* ===== Botón usuario ===== */
-.user-menu {
-    position: relative;
-}
 
-.btn-user {
-    background: transparent;
-    border: 1px solid white;
-    color: white;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.user-dropdown {
-    position: absolute;
-    top: 110%;
-    right: 0;
-    background: rgba(0,0,0,0.9);
-    border-radius: 6px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    z-index: 2000;
-}
-
-.user-dropdown button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    text-align: left;
-}
-
-.user-dropdown button:hover {
-    color: #3b82f6;
-}
-
-.hidden {
-    display: none;
-}
