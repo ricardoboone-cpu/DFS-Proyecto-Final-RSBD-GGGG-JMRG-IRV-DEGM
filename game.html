@@ -19,6 +19,13 @@
       
       <nav class="navbar">
         <ul>
+          <li class="user-menu">
+            <button id="login-btn" class="btn-user">Iniciar sesión</button>
+            <div id="user-dropdown" class="user-dropdown hidden">
+              <button id="logout-btn">Cerrar sesión</button>
+              <button id="switch-btn">Cambiar usuario</button>
+            </div>
+          </li>
           <li><a href="index.html#inicio">Inicio</a></li>
           <li><a href="index.html#juegos">Juegos</a></li>
           <li><a href="index.html#info">Información</a></li>
@@ -85,5 +92,63 @@
       navbar.classList.toggle('active');
     });
   </script>
+  <script>
+/* ===== Protección admin ===== */
+const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+const btnVolver = document.querySelector(".btn-volver");
+
+if (btnVolver && (!loggedUser || loggedUser.role !== "admin")) {
+    btnVolver.style.display = "none";
+}
+
+/* ===== Botón sesión ===== */
+const loginBtn = document.getElementById("login-btn");
+const dropdown = document.getElementById("user-dropdown");
+const logoutBtn = document.getElementById("logout-btn");
+const switchBtn = document.getElementById("switch-btn");
+
+/* ===== ESTADO SIN USUARIO ===== */
+if (!loggedUser) {
+    loginBtn.textContent = "Iniciar sesión";
+
+    loginBtn.addEventListener("click", () => {
+        window.location.href = "login.html";
+    });
+
+} 
+/* ===== ESTADO CON USUARIO ===== */
+else {
+    loginBtn.textContent = loggedUser.username;
+
+    loginBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle("hidden");
+    });
+
+    // Cerrar sesión → NO redirige
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("loggedUser");
+        dropdown.classList.add("hidden");
+        loginBtn.textContent = "Iniciar sesión";
+
+        // Cambia comportamiento del botón
+        loginBtn.onclick = () => {
+            window.location.href = "login.html";
+        };
+    });
+
+    // Cambiar usuario → SÍ redirige
+    switchBtn.addEventListener("click", () => {
+        localStorage.removeItem("loggedUser");
+        window.location.href = "login.html";
+    });
+}
+
+// Click fuera cierra menú
+document.addEventListener("click", () => {
+    dropdown.classList.add("hidden");
+});
+</script>
+
 </body>
 </html>

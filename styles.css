@@ -255,6 +255,8 @@ img {
 .navbar ul {
     display: flex;
     list-style: none;
+    align-items: center; /* centra verticalmente todos los <li> */
+    gap: 15px;           /* separación entre links */
 }
 
 .navbar a {
@@ -266,13 +268,12 @@ img {
 
 .navbar a:hover { color: aqua; }
 
-/* ===== Botón Usuario (unificado) =====
-   En tu archivo original había varias definiciones de .user-menu/.btn-user.
-   Conservo la última definición (la más específica) para respetar la cascada. */
+/* ===== Botón Usuario (unificado) =====*/
 .user-menu {
-    position: relative; /* necesario para el dropdown */
+    position: relative;   /* necesario para que el dropdown se posicione respecto a este contenedor */
+    margin-left: auto;    /* empuja el botón a la derecha */
     display: flex;
-    align-items: center; /* asegura que se alinee verticalmente */
+    align-items: center;  /* centra verticalmente el botón dentro de la barra */
 }
 
 .btn-user {
@@ -282,17 +283,17 @@ img {
     padding: 6px 12px;
     cursor: pointer;
     border-radius: 5px;
-    z-index: 3001; /* conservo el valor final que tenías */
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    z-index: 3001;
+    position: relative;    /* mantiene el dropdown relativo */
+    top: auto;             /* eliminar top 50% */
+    transform: none;       /* eliminar translateY */
 }
 
 /* Dropdown (única definición consolidada) */
 .user-dropdown {
     position: absolute;
-    top: 110%;
-    right: 0;
+    top: 100%;            /* justo debajo del botón */
+    right: 0;             /* alineado a la derecha del botón */
     background: rgba(0,0,0,0.9);
     border-radius: 6px;
     padding: 10px;
@@ -597,7 +598,7 @@ button:hover { background-color: rgb(52,94,231); }
 }
 
 .header-game .logo img {
-    max-height: 60px;
+    max-height: 50px;
     width: auto;
 }
 
