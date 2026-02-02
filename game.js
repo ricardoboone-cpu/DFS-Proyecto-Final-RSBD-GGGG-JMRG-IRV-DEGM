@@ -7,7 +7,17 @@ const games = [
     year: 2022,
     image: "IMGS/juegos/SONICFRONTIERS.avif",
     trailer: "https://www.youtube.com/embed/F42pHusbeME?si=q8LvpNyYR95nx4Hx",
-    description: "La más reciente aventura de Sonic The Hedgehog será un choque entre mundos. Una experiencia como ninguna otra antes, acelera a nuevos niveles y experimenta la emoción y la libertad de la alta velocidad en una zona abierta. Combate contra poderosos enemigos mientras recorres las islas de estrellas fugaces en paisajes llenos de densa vegetación, desbordantes cascadas, sofocantes desiertos, y más. Estas fiestas 2022, viaja a nuevos lugares."
+    description: "La más reciente aventura de Sonic The Hedgehog será un choque entre mundos. Una experiencia como ninguna otra antes, acelera a nuevos niveles y experimenta la emoción y la libertad de la alta velocidad en una zona abierta. Combate contra poderosos enemigos mientras recorres las islas de estrellas fugaces en paisajes llenos de densa vegetación, desbordantes cascadas, sofocantes desiertos, y más. Estas fiestas 2022, viaja a nuevos lugares.",
+    sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
+    images: [
+      "IMGS/juegosextras/SONICF1.avif",
+      "IMGS/juegosextras/SONICF2.png",
+      "IMGS/juegosextras/SONICF3.jpg"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   },
   { 
     id: "2",
@@ -32,7 +42,17 @@ const games = [
     <p>¡El pasado se encuentra con el presente en SONIC GENERATIONS! Cuando el Dr. Eggman se alía con su yo del pasado y el misterioso Devorador de Tiempo para borrar sus derrotas pasadas y reescribir la historia, dispersan a Sonic y sus amigos por el espacio y el tiempo. ¡Ahora, el Sonic moderno y el clásico tendrán que unir fuerzas para derrotar a este trío malvado y restaurar la normalidad en su línea temporal! Lo mejor de ambos mundos, remasterizado</p>
     <p>Recorre una colección de grandes éxitos con versiones 3D y 2D de escenarios icónicos de anteriores juegos de Sonic, ahora con gráficos actualizados y cinemáticas rediseñadas.</p>
     <p>¡Más coleccionables, contenido adicional y mucho más!</p>
-    <p>Rescata a Chao, que se esconde en cada nivel, consigue la puntuación más alta en el pinball de la Zona Noches de Casino y visita el museo para ver arte, música y mucho más.</p>`
+    <p>Rescata a Chao, que se esconde en cada nivel, consigue la puntuación más alta en el pinball de la Zona Noches de Casino y visita el museo para ver arte, música y mucho más.</p>`,
+    sinopsis: "Shadow the Hedgehog está de regreso con Sonic clásico y moderno en SONIC X SHADOW GENERATIONS, ¡una colección completamente nueva que presenta dos experiencias únicas!",
+    images: [
+      "IMGS/juegosextras/SONICS1.jpg",
+      "IMGS/juegosextras/SONICS2.jpg",
+      "IMGS/juegosextras/SONICS3.webp"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   },
   { 
     id: "3",
@@ -41,7 +61,22 @@ const games = [
     year: 2025,
     image: "IMGS/juegos/SONICCARRERAS.avif",
     trailer: "https://www.youtube.com/embed/MdwpXxYHyI8?si=FYxXZ2ATik6erXyj",
-    description: ""
+    description: `<p>¡Corre por tierra, mar, aire y espacio en Sonic Racing: CrossWorlds! Usa los Rings de travesía para teletransportarte a dimensiones nuevas donde te esperan novedades en cada curva.</p>
+    <p>Acelera hasta la victoria en solitario o con amigos en una gran variedad de modos en línea y sin conexión y compite contra jugadores de todo el mundo. Construye el vehículo definitivo que mejor se adapte a tu estilo de conducción, desbloquea artilugios para obtener ventaja y usa potenciadores para llevarte la victoria a casa.</p>
+    <p>¡En sus marcas, listos, teletransporte!</p>
+    <p>Compite en 24 pistas y viaja a 15 CrossWorlds con Rings de travesía, una mecánica de juego única que transporta a los personajes icónicos de los universos Sonic y SEGA a nuevas dimensiones. ¡Aprovecha que las carreras son imprevisibles para cambiar el paisaje de cada una a tu favor!</p>
+    <p>Hazlo tuyo</p>
+    <p>Mezcla y combina 45 vehículos originales únicos y 70 artilugios diferentes para mejorar tu vehículo, subir de nivel tu kart y crear la máquina definitiva que se adapte a tu estilo de conducción.</p>`,
+    sinopsis: "Corre por tierra, mar, aire, espacio y tiempo en Sonic Racing: CrossWorlds. Viaja a través de los rings de travesía a dimensiones nuevas donde te esperan novedades en cada giro.",
+    images: [
+      "IMGS/juegosextras/SONICF1.avif",
+      "IMGS/juegosextras/SONICF2.png",
+      "IMGS/juegosextras/SONICF3.jpg"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   },
   { 
     id: "4",
@@ -50,7 +85,17 @@ const games = [
     year: 2025,
     image: "IMGS/juegos/FULBO.jpg",
     trailer: "",
-    description: ""
+    description: "",
+    sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
+    images: [
+      "IMGS/juegosextras/SONICF1.avif",
+      "IMGS/juegosextras/SONICF2.png",
+      "IMGS/juegosextras/SONICF3.jpg"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   },
   { 
     id: "5",
@@ -59,7 +104,17 @@ const games = [
     year: 2025,
     image: "IMGS/juegos/NINJA.jpg",
     trailer: "",
-    description: ""
+    description: "",
+    sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
+    images: [
+      "IMGS/juegosextras/SONICF1.avif",
+      "IMGS/juegosextras/SONICF2.png",
+      "IMGS/juegosextras/SONICF3.jpg"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   },
   { 
     id: "6",
@@ -68,7 +123,17 @@ const games = [
     year: 2025,
     image: "IMGS/juegos/Yakuza2.jpg",
     trailer: "",
-    description: ""
+    description: "",
+    sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
+    images: [
+      "IMGS/juegosextras/SONICF1.avif",
+      "IMGS/juegosextras/SONICF2.png",
+      "IMGS/juegosextras/SONICF3.jpg"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   },
   { 
     id: "7",
@@ -77,7 +142,17 @@ const games = [
     year: 2026,
     image: "IMGS/juegos/Yakuza3.jpg",
     trailer: "",
-    description: ""
+    description: "",
+    sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
+    images: [
+      "IMGS/juegosextras/SONICF1.avif",
+      "IMGS/juegosextras/SONICF2.png",
+      "IMGS/juegosextras/SONICF3.jpg"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   },
   { 
     id: "8",
@@ -86,7 +161,17 @@ const games = [
     year: 2026,
     image: "IMGS/juegos/Persona4Revival.jpg",
     trailer: "",
-    description: ""
+    description: "",
+    sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
+    images: [
+      "IMGS/juegosextras/SONICF1.avif",
+      "IMGS/juegosextras/SONICF2.png",
+      "IMGS/juegosextras/SONICF3.jpg"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   },
   { 
     id: "9",
@@ -95,7 +180,17 @@ const games = [
     year: 2025,
     image: "IMGS/juegos/Persona5elfantasmadeX.jpg",
     trailer: "",
-    description: ""
+    description: "",
+    sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
+    images: [
+      "IMGS/juegosextras/SONICF1.avif",
+      "IMGS/juegosextras/SONICF2.png",
+      "IMGS/juegosextras/SONICF3.jpg"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   },
   { 
     id: "10",
@@ -104,7 +199,17 @@ const games = [
     year: 2025,
     image: "IMGS/juegos/Museum.jpg",
     trailer: "",
-    description: ""
+    description: "",
+    sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
+    images: [
+      "IMGS/juegosextras/SONICF1.avif",
+      "IMGS/juegosextras/SONICF2.png",
+      "IMGS/juegosextras/SONICF3.jpg"
+    ],
+    comprar: [
+      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+    ]
   }
 ];
 
@@ -150,7 +255,7 @@ function loadGame() {
     imageEl.src = game.image;
     imageEl.alt = game.title;
 
-    // Cargar iframe del tráiler de YouTube si existe
+    // ====== Tráiler ======
     if (game.trailer) {
       trailerContainer.innerHTML = `
         <iframe 
@@ -159,14 +264,95 @@ function loadGame() {
           frameborder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
           allowfullscreen
-          style="position: absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+          style="position: absolute; top:0; left:0; width:100%; height:100%; border-radius:10px;"></iframe>
       `;
     } else {
       trailerContainer.innerHTML = "<p>No hay tráiler disponible.</p>";
     }
 
-    // Información
+    // ====== Información ======
     descEl.innerHTML = game.description || "<p>Información no disponible.</p>";
+
+// ====== Contenedor derecho (image + sinopsis + galería + comprar) ======
+const rightColumn = imageEl.parentElement; // asumiendo que imageEl está dentro de la columna derecha
+
+// Limpiamos elementos anteriores (opcional si recargas)
+const existingContainers = rightColumn.querySelectorAll("#game-sinopsis, #game-gallery, #game-comprar");
+existingContainers.forEach(el => el.remove());
+
+// ====== Sinopsis ======
+if (game.sinopsis) {
+  const sinopsisContainer = document.createElement("p");
+  sinopsisContainer.id = "game-sinopsis";
+  sinopsisContainer.style.margin = "15px 0";
+  sinopsisContainer.style.fontStyle = "italic";
+  sinopsisContainer.textContent = game.sinopsis;
+  rightColumn.appendChild(sinopsisContainer); // agregado primero
+}
+
+// ====== Galería ======
+if (game.images && game.images.length) {
+  const galleryContainer = document.createElement("div");
+  galleryContainer.id = "game-gallery";
+  galleryContainer.style.display = "flex";
+  galleryContainer.style.flexDirection = "column";
+  galleryContainer.style.alignItems = "center";
+  galleryContainer.style.gap = "10px";
+  galleryContainer.style.marginTop = "10px";
+
+  game.images.forEach(imgSrc => {
+    const img = document.createElement("img");
+    img.src = imgSrc;
+    img.style.width = "100%";
+    img.style.maxWidth = "300px";
+    img.style.height = "200px";
+    img.style.objectFit = "cover";
+    img.style.borderRadius = "8px";
+    img.style.boxShadow = "0 2px 6px rgba(0,0,0,0.5)";
+    galleryContainer.appendChild(img);
+  });
+
+  rightColumn.appendChild(galleryContainer); // agregado después de la sinopsis
+}
+
+// ====== Sección Comprar ======
+if (game.comprar && game.comprar.length) {
+  const comprarContainer = document.createElement("div");
+  comprarContainer.id = "game-comprar";
+  comprarContainer.style.display = "flex";
+  comprarContainer.style.flexWrap = "wrap";
+  comprarContainer.style.justifyContent = "center";
+  comprarContainer.style.gap = "10px";
+  comprarContainer.style.marginTop = "15px";
+
+  game.comprar.forEach(store => {
+    const a = document.createElement("a");
+    a.href = store.link;
+    a.target = "_blank";
+    a.style.display = "inline-block";
+    a.style.padding = "5px 15px";
+    a.style.backgroundColor = "rgba(0,0,0,0.3)";
+    a.style.borderRadius = "10px";
+    a.style.boxShadow = "0 2px 6px rgba(0,0,0,0.5)";
+    a.style.transition = "0.3s";
+    a.style.textDecoration = "none";
+
+    a.onmouseover = () => a.style.transform = "scale(1.05)";
+    a.onmouseout = () => a.style.transform = "scale(1)";
+
+    const img = document.createElement("img");
+    img.src = store.logo;
+    img.alt = store.nombre;
+    img.style.height = "40px";
+    img.style.width = "auto";
+
+    a.appendChild(img);
+    comprarContainer.appendChild(a);
+  });
+
+  rightColumn.appendChild(comprarContainer); // abajo de la galería
+}
+
   }
 }
 
