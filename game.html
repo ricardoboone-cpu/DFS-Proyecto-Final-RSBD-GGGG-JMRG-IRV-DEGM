@@ -1,51 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Detalle del Juego</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalles del Juego</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="game-body">
 
-  <!-- Header (usa .header-game para que no aparezca FondoXD) -->
+  <!-- Header -->
   <header class="header-game">
     <div class="menu sega">
-      <a href="sega.html" class="logo">
-        <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA" />
+      <a href="index.html" class="logo">
+        <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA">
       </a>
 
       <div class="menu-toggle">☰</div>
-
+      
       <nav class="navbar">
         <ul>
-          <li><a href="sega.html#inicio">Inicio</a></li>
-          <li><a href="sega.html#juegos">Juegos</a></li>
-          <li><a href="sega.html#info">Información</a></li>
-          <li><a href="sega.html#contacto">Contacto</a></li>
+          <li><a href="index.html#inicio">Inicio</a></li>
+          <li><a href="index.html#juegos">Juegos</a></li>
+          <li><a href="index.html#info">Información</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
+    <div class="header-content" style="background:none; padding:20px;">
+      <h1 id="game-title">Cargando...</h1>
+    </div>
   </header>
 
-  <!-- Contenido del juego -->
-  <main class="informacion" style="padding: 40px; text-align: center;">
-    <h1 id="game-title">Cargando juego...</h1>
+  <!-- Contenido principal estilo Steam -->
+  <main style="padding: 20px; max-width: 1200px; margin: auto;">
+    <div class="game-details" style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center;">
 
-    <img id="game-image" src="" alt="Imagen del juego"
-         style="max-width: 400px; width: 100%; border-radius: 10px; margin: 20px 0;" />
+      <!-- Izquierda: Tráiler + Descripción -->
+      <div class="game-left" style="flex: 1 1 500px; min-width: 300px;">
+        <!-- Tráiler -->
+        <section class="trailer" style="margin-bottom: 30px;">
+          <h2>Tráiler</h2>
+          <div id="game-trailer-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">
+            <!-- iframe se carga desde JS -->
+          </div>
+        </section>
 
-    <p><strong>Género:</strong> <span id="game-genre">-</span></p>
-    <p><strong>Año:</strong> <span id="game-year">-</span></p>
+        <!-- Información del juego -->
+        <section class="info-juego">
+          <h2>Información del Juego</h2>
+          <p id="game-description">Cargando información...</p>
+        </section>
+      </div>
 
-    <a href="sega.html" class="btn-volver" title="Volver a SEGA">⬅</a>
+      <!-- Derecha: Imagen + Género + Año -->
+      <div class="game-right" style="flex: 0 0 350px; text-align:center;">
+        <img id="game-image" src="IMGS/juegos/default.jpg" alt="Juego" style="max-width:100%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.4); margin-bottom: 15px;">
+        <p><strong>Género:</strong> <span id="game-genre">-</span></p>
+        <p><strong>Año:</strong> <span id="game-year">-</span></p>
+      </div>
+
+    </div>
   </main>
 
+  <!-- Botón volver -->
+  <a href="index.html" class="btn-volver" title="Volver al inicio">⬅</a>
+
+  <!-- Footer -->
   <footer class="footer">
-    <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA" />
+    <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA">
+    <div class="links">
+      <a href="https://www.facebook.com/SEGA/?locale=es_LA" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/sega/reels/" target="_blank">Instagram</a>
+      <a href="https://x.com/SEGA" target="_blank">X</a>
+    </div>
     <p>© 2026 SEGA. Todos los derechos reservados.</p>
   </footer>
 
   <script src="game.js"></script>
+  <script>
+    // Menu hamburguesa
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navbar = document.querySelector('.navbar');
+    menuToggle.addEventListener('click', () => {
+      navbar.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
