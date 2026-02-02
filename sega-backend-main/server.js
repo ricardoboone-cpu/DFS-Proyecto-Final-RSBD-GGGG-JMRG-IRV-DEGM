@@ -13,41 +13,11 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Mongo conectado"))
   .catch(err => console.log(err));
 
-const User = require("./models/User");
-
-mongoose.connect(process.env.MONGO_URI)
-  .then(async () => {
-    console.log("Mongo conectado");
-
-    const users = await User.find();
-    if (users.length === 0) {
-      console.log("Creando usuarios iniciales...");
-
-      await User.create([
-        {
-          username: "eggman",
-          password: "adminPassword",
-          role: "admin"
-        },
-        {
-          username: "metalsonic",
-          password: "userPassword",
-          role: "user"
-        }
-      ]);
-
-      console.log("Usuarios creados");
-    }
-  });
-
-
 // rutas
 app.use('/api/games', require('./routes/games.routes'));
+app.use("/api/auth", require("./routes/auth.routes"));
 
-const authRoutes = require("./routes/auth.routes");
-app.use("/api/auth", authRoutes);
-
-// middleware de errores (SIEMPRE antes del listen)
+// middleware de errores
 const errorMiddleware = require("./middlewares/errorMiddleware");
 app.use(errorMiddleware);
 
