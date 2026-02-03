@@ -1,3 +1,11 @@
+// ================= Botón para ir a Editor de Juegos =================
+const btnEditor = document.getElementById("ir-editor");
+if (btnEditor) {
+    btnEditor.addEventListener("click", () => {
+        window.location.href = "editorjuegos.html";
+    });
+}
+
 // ================= Clase Tarea =================
 class Tarea {
     constructor(nombre, completada = false) {

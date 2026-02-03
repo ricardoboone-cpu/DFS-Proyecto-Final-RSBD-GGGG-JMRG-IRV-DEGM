@@ -92,14 +92,10 @@
       navbar.classList.toggle('active');
     });
   </script>
-  <script>
+<script>
 /* ===== Protección admin ===== */
 const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 const btnVolver = document.querySelector(".btn-volver");
-
-if (btnVolver && (!loggedUser || loggedUser.role !== "admin")) {
-    btnVolver.style.display = "none";
-}
 
 /* ===== Botón sesión ===== */
 const loginBtn = document.getElementById("login-btn");

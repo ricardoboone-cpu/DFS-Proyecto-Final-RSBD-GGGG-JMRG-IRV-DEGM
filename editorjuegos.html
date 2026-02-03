@@ -19,6 +19,32 @@
 </head>
 <body class="game-body">
 
+  <!-- Header -->
+  <header class="header-game">
+    <div class="menu sega">
+      <a href="index.html" class="logo">
+        <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA">
+      </a>
+
+      <div class="menu-toggle">☰</div>
+      
+      <nav class="navbar">
+        <ul>
+          <li class="user-menu">
+            <button id="login-btn" class="btn-user">Iniciar sesión</button>
+            <div id="user-dropdown" class="user-dropdown hidden">
+                <button id="logout-btn">Cerrar sesión</button>
+                <button id="switch-btn">Cambiar usuario</button>
+            </div>
+          </li>
+          <li><a href="index.html#inicio">Inicio</a></li>
+          <li><a href="index.html#juegos">Juegos</a></li>
+          <li><a href="index.html#info">Información</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+  </header>
+
     <div class="editor-container">
         <h1>Editor de Juegos SEGA</h1>
         
@@ -44,6 +70,23 @@
                 <label>Descripción:</label>
                 <textarea id="description" rows="3" required></textarea>
             </div>
+            <div class="form-group">
+                <label>URL Tráiler (YouTube embed):</label>
+                <input type="text" id="trailer" placeholder="https://www.youtube.com/embed/...">
+            </div>
+            <div class="form-group">
+                <label>Sinopsis corta:</label>
+                <textarea id="sinopsis" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Galería (URLs separadas por coma):</label>
+                <textarea id="images" rows="2" placeholder="img1.jpg, img2.jpg, img3.jpg"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Tiendas (JSON):</label>
+                <textarea id="comprar" rows="4" placeholder='[{"nombre":"Steam","logo":"IMGS/logos/steam.png","link":"https://..."}]'></textarea>
+            </div>
+
             <button type="submit" class="btn-guardar" id="btn-submit">Agregar Juego</button>
             <button type="button" id="btn-cancelar" style="display:none;">Cancelar Edición</button>
         </form>
@@ -62,13 +105,49 @@
         </table>
     </div>
 <!-- Botón volver a inicio -->
-<a href="index.html" class="btn-volver" title="Volver al inicio">
+<a href="salaadmin.html" class="btn-volver" title="Volver al inicio">
     ⬅
 </a>
 
     <script>
         // Lógica de Persistencia (LocalStorage)
-        let juegos = JSON.parse(localStorage.getItem("juegos_sega")) || [];
+    // ===== JUEGOS BASE (CATÁLOGO ORIGINAL) =====
+const juegosBase = [
+    {
+        title: "Sonic Frontiers",
+        genre: "Action",
+        year: 2022,
+        image: "IMGS/juegos/sonic-frontiers.avif",
+        description: "Explora las Starfall Islands con Sonic.",
+        trailer: "",
+        sinopsis: "Sonic en mundo abierto",
+        images: [],
+        comprar: []
+    },
+    {
+        title: "Sonic Mania",
+        genre: "Plataformas",
+        year: 2017,
+        image: "IMGS/juegos/sonic-mania.avif",
+        description: "El regreso clásico de Sonic.",
+        trailer: "",
+        sinopsis: "",
+        images: [],
+        comprar: []
+    }
+];
+
+// ===== CARGA + SEED =====
+let juegos = JSON.parse(localStorage.getItem("juegos_sega"));
+
+if (!juegos || juegos.length === 0) {
+    juegos = juegosBase.map(juego => ({
+        ...juego,
+        id: Date.now().toString() + Math.random().toString(16).slice(2)
+    }));
+    localStorage.setItem("juegos_sega", JSON.stringify(juegos));
+}
+
 
         const form = document.getElementById("form-juego");
         const lista = document.getElementById("lista-juegos-admin");
@@ -100,15 +179,32 @@
             const id = document.getElementById("edit-id").value || Date.now().toString();
             const nuevoJuego = {
                 id: id,
-                title: document.getElementById("title").value,
+        title: document.getElementById("title").value,
                 genre: document.getElementById("genre").value,
-                year: document.getElementById("year").value,
+                year: Number(document.getElementById("year").value),
                 image: document.getElementById("image").value,
-                description: document.getElementById("description").value
+                description: document.getElementById("description").value,
+
+                // ✅ CAMPOS QUE FALTABAN
+                trailer: document.getElementById("trailer").value,
+                sinopsis: document.getElementById("sinopsis").value,
+                images: document.getElementById("images").value
+                    .split(",")
+                    .map(img => img.trim())
+                    .filter(img => img !== ""),
+
+                comprar: (() => {
+                    try {
+                        return JSON.parse(document.getElementById("comprar").value || "[]");
+                    } catch {
+                        alert("Error en el formato JSON de Tiendas");
+                        return [];
+                    }
+                })()
             };
 
             const index = juegos.findIndex(j => j.id === id);
-            if(index !== -1) juegos[index] = nuevoJuego;
+            if (index !== -1) juegos[index] = nuevoJuego;
             else juegos.push(nuevoJuego);
 
             guardar();
@@ -131,9 +227,82 @@
             document.getElementById("image").value = juego.image;
             document.getElementById("description").value = juego.description;
             document.getElementById("btn-submit").innerText = "Actualizar Juego";
+            document.getElementById("trailer").value = juego.trailer || "";
+            document.getElementById("sinopsis").value = juego.sinopsis || "";
+            document.getElementById("images").value = (juego.images || []).join(", ");
+            document.getElementById("comprar").value = JSON.stringify(juego.comprar || [], null, 2);
+
         };
 
         render();
     </script>
+  <script>
+    // Menu hamburguesa
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navbar = document.querySelector('.navbar');
+    menuToggle.addEventListener('click', () => {
+      navbar.classList.toggle('active');
+    });
+  </script>
+<script>
+  // Verificamos si hay usuario logueado y si es admin
+  let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+  function verificarAdmin() {
+      loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+      if (!loggedUser || loggedUser.role !== "admin") {
+          alert("Acceso denegado. Solo administradores pueden entrar.");
+          window.location.href = "login.html";
+      }
+  }
+
+  // Llamamos al inicio
+  verificarAdmin();
+
+  /* ===== Botón sesión ===== */
+  const loginBtn = document.getElementById("login-btn");
+  const dropdown = document.getElementById("user-dropdown");
+  const logoutBtn = document.getElementById("logout-btn");
+  const switchBtn = document.getElementById("switch-btn");
+
+  /* ===== ESTADO SIN USUARIO ===== */
+  if (!loggedUser) {
+      loginBtn.textContent = "Iniciar sesión";
+      loginBtn.addEventListener("click", () => {
+          window.location.href = "login.html";
+      });
+  } 
+  /* ===== ESTADO CON USUARIO ===== */
+  else {
+      loginBtn.textContent = loggedUser.username;
+
+      loginBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          dropdown.classList.toggle("hidden");
+      });
+
+      // Cerrar sesión → redirige si ya no es admin
+      logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("loggedUser");
+          dropdown.classList.add("hidden");
+          loginBtn.textContent = "Iniciar sesión";
+
+          // Redirigimos al login automáticamente
+          window.location.href = "login.html";
+      });
+
+      // Cambiar usuario → redirige a login
+      switchBtn.addEventListener("click", () => {
+          localStorage.removeItem("loggedUser");
+          window.location.href = "login.html";
+      });
+  }
+
+  // Click fuera cierra menú
+  document.addEventListener("click", () => {
+      dropdown.classList.add("hidden");
+  });
+</script>
+
 </body>
 </html>

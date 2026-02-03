@@ -447,11 +447,6 @@ if (game.comprar && game.comprar.length) {
   }
 }
 
-// ====== Ejecutar ======
-loadGame();
-
-
-
 // ===== Agregar juegos nuevos desde localStorage ======
 // 1. Buscamos si hay juegos nuevos guardados por el editor
 const juegosNuevos = JSON.parse(localStorage.getItem("juegos_sega")) || [];
@@ -473,3 +468,8 @@ juegosNuevos.forEach(nuevoJuego => {
 if (typeof renderGames === 'function' && document.getElementById("juegos-container")) {
     renderGames(); 
 }
+
+
+
+// ====== Ejecutar ======
+loadGame();
