@@ -453,7 +453,7 @@ const games = [
             juegos.forEach(juego => {
                 lista.innerHTML += `
                     <tr>
-                        <td><img src="${juego.image}" width="50"></td>
+                        <td><img src="${juego.image}" width="50" onerror="this.onerror=null;this.src='IMGS/juegos/SINIMGS.png'"></td>
                         <td>${juego.title}</td>
                         <td>${juego.year}</td>
                         <td>
@@ -470,13 +470,13 @@ const games = [
             const id = document.getElementById("edit-id").value || Date.now().toString();
             const nuevoJuego = {
                 id: id,
-        title: document.getElementById("title").value,
+                title: document.getElementById("title").value,
                 genre: document.getElementById("genre").value,
                 year: Number(document.getElementById("year").value),
-                image: document.getElementById("image").value,
+                image: document.getElementById("image").value.trim() || "IMGS/juegos/SINIMGS.png", // <-- FIX
                 description: document.getElementById("description").value,
 
-                // ✅ CAMPOS QUE FALTABAN
+
                 trailer: document.getElementById("trailer").value,
                 sinopsis: document.getElementById("sinopsis").value,
                 images: document.getElementById("images").value
@@ -503,6 +503,7 @@ const games = [
             document.getElementById("edit-id").value = "";
             document.getElementById("btn-submit").innerText = "Agregar Juego";
         };
+
 
         window.eliminarJuego = (id) => {
             juegos = juegos.filter(j => j.id !== id);
