@@ -3,8 +3,14 @@ body.inicio {
     padding-top: 0;
 }
 
+/* Evita scroll horizontal y límites inesperados */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 .inicio-container {
-    min-height: 100vh;
+    min-height: 100svh; /* usa svh para evitar cortes en móviles */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,7 +35,7 @@ body.tareas-body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100svh; /* usa svh para móvil */
 }
 
 .task-app {
@@ -187,17 +193,25 @@ body.tareas-body {
     box-sizing: border-box;
 }
 
+/* Quitar padding-top global (evita contenido aplastado en móviles).
+   Para páginas con menú fijo, usa la clase .has-menu en el <body> */
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: linear-gradient(90deg, #050c64, #345EE7, #8FA9FF, #345EE7, #050c64);
     color: white;
     line-height: 1.6;
+    padding-top: 0; /* cambiado de 60px a 0 */
+}
+
+/* Utilidad: aplica espacio superior cuando la página tiene menú fijo */
+.has-menu {
     padding-top: 60px;
 }
 
 img {
     max-width: 100%;
     height: auto;
+    display: block;
 }
 
 /* ================= Header ================= */
@@ -383,6 +397,7 @@ img {
 
 form { max-width: 400px; margin: auto; }
 
+/* Evita inputs demasiado altos en móvil y mantiene proporciones */
 input, textarea {
     width: 100%;
     padding: 10px;
@@ -391,6 +406,13 @@ input, textarea {
     border: 1px solid #ccc;
     min-height: 50px;
     resize: vertical;
+}
+
+/* Ajuste específico para móviles: inputs menos altos y cómodos */
+@media (max-width: 480px) {
+    input, textarea {
+        min-height: 44px;
+    }
 }
 
 button {
@@ -601,9 +623,11 @@ button:hover { background-color: rgb(52,94,231); }
     max-height: 50px;
     width: auto;
 }
+
 /* ================= LOGIN SEGA ================= */
+/* usa svh para evitar cortes en móviles */
 body.sonic-login {
-    min-height: 100vh;
+    min-height: 100svh;
     background: radial-gradient(circle at top, #001b4d, #000814);
     display: flex;
     justify-content: center;
@@ -627,6 +651,12 @@ body.sonic-login {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+/* Centrar logo SEGA en login */
+.logo-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* LOGO SEGA */
