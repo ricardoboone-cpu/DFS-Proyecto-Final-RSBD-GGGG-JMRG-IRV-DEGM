@@ -284,6 +284,25 @@ const games = [
     ]
   }
 ];
+// ====== Cargar juegos del editor (localStorage) ======
+let storedGames = [];
+try {
+  storedGames = JSON.parse(localStorage.getItem("juegos_sega")) || [];
+} catch {
+  storedGames = [];
+}
+
+// ====== Combinar juegos base + editor ======
+const allGames = [...games];
+
+// Agregar los que NO existen en games
+storedGames.forEach(stored => {
+  const exists = allGames.some(g => String(g.id) === String(stored.id));
+  if (!exists) {
+    allGames.push(stored);
+  }
+});
+
 
 // ====== Obtener ID del juego desde la URL ======
 const params = new URLSearchParams(window.location.search);
@@ -310,7 +329,8 @@ function loadGame() {
     return;
   }
 
-  const staticGame = games.find(g => g.id === gameId);
+  const staticGame = allGames.find(g => String(g.id) === String(gameId));
+
 
   // Merge any overrides saved from the editor (localStorage key 'juegos_sega')
   let game = staticGame;

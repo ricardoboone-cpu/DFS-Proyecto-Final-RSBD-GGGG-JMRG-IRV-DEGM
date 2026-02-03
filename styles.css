@@ -714,3 +714,24 @@ body.sonic-login {
     margin-bottom: 15px;
     filter: drop-shadow(0 0 10px rgba(0, 120, 255, 0.6));
 }
+.project img {
+    display: block;       /* elimina inline spacing */
+    margin: 0 auto;       /* centra horizontalmente */
+    max-width: 100%;      /* no exceda el contenedor */
+    height: auto;         /* mantiene proporción */
+    border-radius: 8px;   /* opcional, bordes redondeados */
+    object-fit: cover;    /* recorta si es necesario */
+}
+@media (min-width: 992px) {
+    .juegos {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+        justify-items: center;                 /* centra cada proyecto */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .juegos {
+        grid-template-columns: repeat(1, 1fr); /* 1 columna */
+        justify-items: center;
+    }
+}
