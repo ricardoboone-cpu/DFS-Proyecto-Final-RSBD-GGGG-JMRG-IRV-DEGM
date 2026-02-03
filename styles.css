@@ -602,7 +602,6 @@ button:hover { background-color: rgb(52,94,231); }
     width: auto;
 }
 /* ================= LOGIN SEGA ================= */
-
 body.sonic-login {
     min-height: 100vh;
     background: radial-gradient(circle at top, #001b4d, #000814);
@@ -611,6 +610,8 @@ body.sonic-login {
     align-items: center;
     font-family: 'Arial', sans-serif;
     color: white;
+    padding: 0;
+    margin: 0;
 }
 
 /* Contenedor principal */
@@ -619,10 +620,20 @@ body.sonic-login {
     padding: 40px 50px;
     border-radius: 18px;
     width: 100%;
-    max-width: 420px;
+    max-width: 420px;  /* PC normal */
     text-align: center;
     box-shadow: 0 0 30px rgba(0, 110, 255, 0.4);
     animation: fadeIn 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* LOGO SEGA */
+.sega-logo {
+    width: 220px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(0, 120, 255, 0.6));
 }
 
 /* Títulos */
@@ -708,30 +719,81 @@ body.sonic-login {
         transform: scale(1);
     }
 }
-/* ===== LOGO SEGA LOGIN ===== */
-.sega-logo {
-    width: 220px;
-    margin-bottom: 15px;
-    filter: drop-shadow(0 0 10px rgba(0, 120, 255, 0.6));
-}
-.project img {
-    display: block;       /* elimina inline spacing */
-    margin: 0 auto;       /* centra horizontalmente */
-    max-width: 100%;      /* no exceda el contenedor */
-    height: auto;         /* mantiene proporción */
-    border-radius: 8px;   /* opcional, bordes redondeados */
-    object-fit: cover;    /* recorta si es necesario */
-}
-@media (min-width: 992px) {
-    .juegos {
-        grid-template-columns: repeat(2, 1fr); /* 2 columnas */
-        justify-items: center;                 /* centra cada proyecto */
+
+/* ================= RESPONSIVE CELULAR Y TABLET ================= */
+@media (max-width: 991px) {
+    .login-container {
+        width: 92%;
+        max-width: none;
+        padding: 40px 25px;
+        min-height: 65vh;
+    }
+
+    /* LOGO más protagonista */
+    .sega-logo {
+        width: 200px;
+        margin-bottom: 25px;
+    }
+
+    /* Títulos */
+    .sega-title {
+        font-size: 52px;
+        letter-spacing: 4px;
+        margin-bottom: 12px;
+    }
+
+    .sonic-subtitle {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    /* Labels más legibles */
+    .input-group label {
+        font-size: 14px;
+        letter-spacing: 1.5px;
+    }
+
+    /* Inputs grandes (clave) */
+    .input-group input {
+        font-size: 17px;
+        padding: 16px 14px;
+        margin-top: 8px;
+    }
+
+    /* Botón más grande */
+    .start-btn {
+        font-size: 20px;
+        padding: 16px;
+        margin-top: 25px;
     }
 }
+/* ================= CELULARES PEQUEÑOS ================= */
+@media (max-width: 480px) {
+    .login-container {
+        width: 96%;
+        min-height: 70vh;
+        padding: 35px 18px;
+    }
 
-@media (min-width: 768px) and (max-width: 991px) {
-    .juegos {
-        grid-template-columns: repeat(1, 1fr); /* 1 columna */
-        justify-items: center;
+    .sega-logo {
+        width: 180px;
+    }
+
+    .sega-title {
+        font-size: 44px;
+    }
+
+    .sonic-subtitle {
+        font-size: 17px;
+    }
+
+    .input-group input {
+        font-size: 18px; /* cómodo para escribir */
+        padding: 18px 14px;
+    }
+
+    .start-btn {
+        font-size: 20px;
+        padding: 18px;
     }
 }
