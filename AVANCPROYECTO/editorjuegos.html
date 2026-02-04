@@ -65,7 +65,7 @@
             </div>
             <div class="form-group">
                 <label>URL Imagen Portada:</label>
-                <input type="text" id="image" required placeholder="../IMGS/juegos/nombre.avif">
+                <input type="text" id="image" required placeholder="IMGS/juegos/nombre.avif">
             </div>
             <div class="form-group">
                 <label>Descripción:</label>
@@ -85,7 +85,7 @@
             </div>
             <div class="form-group">
                 <label>Tiendas (JSON):</label>
-                <textarea id="comprar" rows="4" placeholder='[{"nombre":"Steam","logo":"../IMGS/logos/steam.png","link":"https://..."}]'></textarea>
+                <textarea id="comprar" rows="4" placeholder='[{"nombre":"Steam","logo":"IMGS/logos/steam.png","link":"https://..."}]'></textarea>
             </div>
 
             <button type="submit" class="btn-guardar" id="btn-submit">Agregar Juego</button>
@@ -113,32 +113,6 @@
     <script>
       const basePath = "../";
         // Lógica de Persistencia (LocalStorage)
-    // ===== JUEGOS BASE (CATÁLOGO ORIGINAL) =====
-const juegosBase = [
-    {
-        title: "Sonic Frontiers",
-        genre: "Action",
-        year: 2022,
-        image: "../IMGS/juegos/sonic-frontiers.avif",
-        description: "Explora las Starfall Islands con Sonic.",
-        trailer: "",
-        sinopsis: "Sonic en mundo abierto",
-        images: [],
-        comprar: []
-    },
-    {
-        title: "Sonic Mania",
-        genre: "Plataformas",
-        year: 2017,
-        image: "../IMGS/juegos/sonic-mania.avif",
-        description: "El regreso clásico de Sonic.",
-        trailer: "",
-        sinopsis: "",
-        images: [],
-        comprar: []
-    }
-];
-
 
   // ====== Lista de juegos ======
 const games = [
