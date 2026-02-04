@@ -257,6 +257,14 @@ img {
     width: auto;
 }
 
+/* ================= Corrección botón sesión (header) ================= */
+.menu .btn-user {
+    margin-top: 0;      /* elimina el empuje hacia abajo */
+    width: auto;        /* evita que ocupe toda la fila */
+    padding: 8px 14px;
+    line-height: 1;
+}
+
 /* ================= Menú hamburguesa ================= */
 .menu-toggle {
     display: none;
@@ -796,6 +804,26 @@ body.sonic-login {
         padding: 16px;
         margin-top: 25px;
     }
+@media (max-width: 768px) {
+    .navbar ul li {
+        width: 100%;
+    }
+
+    /* Botón sesión en menú hamburguesa */
+    .navbar .btn-user {
+        background: transparent;
+        color: white;
+        font-size: 1rem;
+        width: 100%;
+        padding: 15px 0;
+        margin-top: 0;
+        border-radius: 0;
+        border: none;
+        text-align: center;
+    }
+
+}
+
 }
 /* ================= CELULARES PEQUEÑOS ================= */
 @media (max-width: 480px) {
