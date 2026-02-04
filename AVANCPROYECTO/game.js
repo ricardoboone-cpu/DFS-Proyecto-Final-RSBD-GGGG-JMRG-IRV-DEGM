@@ -5,14 +5,14 @@ const games = [
     title: "Sonic Frontiers",
     genre: "Action",
     year: 2022,
-    image: "/IMGS/juegos/SONICFRONTIERS.avif",
+    image: "../IMGS/juegos/SONICFRONTIERS.avif",
     trailer: "https://www.youtube.com/embed/F42pHusbeME?si=q8LvpNyYR95nx4Hx",
     description: "La más reciente aventura de Sonic The Hedgehog será un choque entre mundos. Una experiencia como ninguna otra antes, acelera a nuevos niveles y experimenta la emoción y la libertad de la alta velocidad en una zona abierta. Combate contra poderosos enemigos mientras recorres las islas de estrellas fugaces en paisajes llenos de densa vegetación, desbordantes cascadas, sofocantes desiertos, y más. Estas fiestas 2022, viaja a nuevos lugares.",
     sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
     images: [
-      "/IMGS/juegosextras/SONICF1.avif",
-      "/IMGS/juegosextras/SONICF2.png",
-      "/IMGS/juegosextras/SONICF3.jpg"
+      "../IMGS/juegosextras/SONICF1.avif",
+      "../IMGS/juegosextras/SONICF2.png",
+      "../IMGS/juegosextras/SONICF3.jpg"
     ],
     comprar: [
       { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
