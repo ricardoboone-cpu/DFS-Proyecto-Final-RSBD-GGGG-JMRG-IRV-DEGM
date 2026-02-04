@@ -151,7 +151,7 @@
             article.setAttribute('data-stored-id', id);
             const h3 = document.createElement('h3'); h3.textContent = j.title || 'Sin título';
             const a = document.createElement('a'); a.href = 'AVANCPROYECTO/game.html?id=' + encodeURIComponent(id);
-            const img = document.createElement('img'); img.src = j.image || 'IMGS/juegos/default.jpg';img.onerror = () => { img.src = 'IMGS/juegos/SINIMGS.png'; }; img.alt = j.title || '';
+            const img = document.createElement('img'); img.src = (j.image?.startsWith("IMGS") ? j.image : "IMGS/juegos/default.jpg");img.onerror = () => { img.src = 'IMGS/juegos/SINIMGS.png'; }; img.alt = j.title || '';
             a.appendChild(img);
             article.appendChild(h3); article.appendChild(a);
             container.appendChild(article);
