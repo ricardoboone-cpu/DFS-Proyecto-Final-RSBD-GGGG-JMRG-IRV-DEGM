@@ -2,50 +2,61 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Proyecto JavaScript</title>
+    <title>Gestor de Tareas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
-<body class="inicio">
+<body class="tareas-body">
 
-  <!-- Header -->
-  <header class="header-game">
-    <div class="menu sega">
-      <a href="index.html" class="logo">
-        <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA">
-      </a>
+    <!-- Header -->
+    <header class="header-game">
+        <div class="menu sega">
+            <a href="../index.html" class="logo">
+                <img src="../IMGS/SEGALOGO2.png" alt="Logo SEGA">
+            </a>
 
-      <div class="menu-toggle">☰</div>
-      
-      <nav class="navbar">
-        <ul>
-          <li class="user-menu">
-            <button id="login-btn" class="btn-user">Iniciar sesión</button>
-            <div id="user-dropdown" class="user-dropdown hidden">
-                <button id="logout-btn">Cerrar sesión</button>
-                <button id="switch-btn">Cambiar usuario</button>
-            </div>
-          </li>
-          <li><a href="index.html#inicio">Inicio</a></li>
-          <li><a href="index.html#juegos">Juegos</a></li>
-          <li><a href="index.html#info">Información</a></li>
-          <li><a href="index.html#contacto">Contacto</a></li>
-        </ul>
-      </nav>
-  </header>
-  
-    <div class="inicio-container">
-        <h1><img src="IMGS/SEGALOGO2.png" alt="Logo de SEGA"></h1>
-        <p>Selecciona una opción</p>
-
-        <div class="opciones">
-            <a href="index.html" class="btn-1">Página SEGA</a>
-            <a href="tareas.html" class="btn-1">Gestor de Tareas</a>
-            <a href="editorjuegos.html" class="btn-1">Editor de juegos</a>
+            <div class="menu-toggle">☰</div>
+            
+            <nav class="navbar">
+                <ul>
+                    <li class="user-menu">
+                        <button id="login-btn" class="btn-user">Iniciar sesión</button>
+                        <div id="user-dropdown" class="user-dropdown hidden">
+                            <button id="logout-btn">Cerrar sesión</button>
+                            <button id="switch-btn">Cambiar usuario</button>
+                        </div>
+                    </li>
+                    <li><a href="../index.html#inicio">Inicio</a></li>
+                    <li><a href="../index.html#juegos">Juegos</a></li>
+                    <li><a href="../index.html#info">Información</a></li>
+                    <li><a href="../index.html#contacto">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
+
+    <div class="task-app">
+        <h1>Gestor de Tareas</h1>
+        <p id="contador" class="contador"></p>
+
+
+        <div class="task-input">
+            <input type="text" id="nuevaTarea" placeholder="Escribe una tarea">
+            <button id="agregar">Agregar</button>
+        </div>
+
+        <ul id="listaTareas"></ul>
+
+        <!-- Botón para ir a Editor de Juegos -->
+        <button id="ir-editor" class="btn-editor">Ir a Editor de Juegos</button>
     </div>
 
+    <script src="app.js"></script>
 
+    <!-- Botón volver a inicio -->
+    <a href="salaadmin.html" class="btn-volver" title="Volver al inicio">
+        ⬅
+    </a>
   <script>
     // Menu hamburguesa
     const menuToggle = document.querySelector('.menu-toggle');
@@ -62,7 +73,7 @@
       loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
       if (!loggedUser || loggedUser.role !== "admin") {
           alert("Acceso denegado. Solo administradores pueden entrar.");
-          window.location.href = "login.html";
+          window.location.href = "../AVANCPROYECTO/login.html";
       }
   }
 
@@ -79,7 +90,7 @@
   if (!loggedUser) {
       loginBtn.textContent = "Iniciar sesión";
       loginBtn.addEventListener("click", () => {
-          window.location.href = "login.html";
+          window.location.href = "../AVANCPROYECTO/login.html";
       });
   } 
   /* ===== ESTADO CON USUARIO ===== */
@@ -98,13 +109,13 @@
           loginBtn.textContent = "Iniciar sesión";
 
           // Redirigimos al login automáticamente
-          window.location.href = "login.html";
+          window.location.href = "../AVANCPROYECTO/login.html";
       });
 
       // Cambiar usuario → redirige a login
       switchBtn.addEventListener("click", () => {
           localStorage.removeItem("loggedUser");
-          window.location.href = "login.html";
+          window.location.href = "../AVANCPROYECTO/login.html";
       });
   }
 
@@ -113,7 +124,6 @@
       dropdown.classList.add("hidden");
   });
 </script>
-
 
 </body>
 </html>

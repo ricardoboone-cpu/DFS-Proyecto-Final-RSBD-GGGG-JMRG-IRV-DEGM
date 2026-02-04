@@ -1,163 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editor de Catálogo - SEGA</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Estilos específicos para el editor */
-        .editor-container { padding: 40px; max-width: 1000px; margin: auto; color: white; background: rgba(0,0,0,0.8); border-radius: 15px; margin-top: 50px; }
-        .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
-        input, textarea { padding: 10px; border-radius: 5px; border: none; margin-top: 5px; }
-        .btn-guardar { background-color: #0063ff; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; }
-        .tabla-juegos { width: 100%; border-collapse: collapse; margin-top: 30px; }
-        .tabla-juegos th, .tabla-juegos td { border: 1px solid #444; padding: 12px; text-align: left; }
-        .btn-del { background: #ff4444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
-        .btn-edit { background: #ffbb33; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; margin-right: 5px; }
-    </style>
-</head>
-<body class="game-body editorjuegos">
-
-
-  <!-- Header -->
-  <header class="header-game">
-    <div class="menu sega">
-      <a href="index.html" class="logo">
-        <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA">
-      </a>
-
-      <div class="menu-toggle">☰</div>
-      
-      <nav class="navbar">
-        <ul>
-          <li class="user-menu">
-            <button id="login-btn" class="btn-user">Iniciar sesión</button>
-            <div id="user-dropdown" class="user-dropdown hidden">
-                <button id="logout-btn">Cerrar sesión</button>
-                <button id="switch-btn">Cambiar usuario</button>
-            </div>
-          </li>
-          <li><a href="index.html#inicio">Inicio</a></li>
-          <li><a href="index.html#juegos">Juegos</a></li>
-          <li><a href="index.html#info">Información</a></li>
-          <li><a href="index.html#contacto">Contacto</a></li>
-        </ul>
-      </nav>
-  </header>
-
-    <div class="editor-container">
-        <h1>Editor de Juegos SEGA</h1>
-        
-        <form id="form-juego">
-            <input type="hidden" id="edit-id">
-            <div class="form-group">
-                <label>Título del Juego:</label>
-                <input type="text" id="title" required placeholder="Ej: Sonic Frontiers">
-            </div>
-            <div class="form-group">
-                <label>Género:</label>
-                <input type="text" id="genre" required placeholder="Ej: Action">
-            </div>
-            <div class="form-group">
-                <label>Año:</label>
-                <input type="number" id="year" required>
-            </div>
-            <div class="form-group">
-                <label>URL Imagen Portada:</label>
-                <input type="text" id="image" required placeholder="IMGS/juegos/nombre.avif">
-            </div>
-            <div class="form-group">
-                <label>Descripción:</label>
-                <textarea id="description" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <label>URL Tráiler (YouTube embed):</label>
-                <input type="text" id="trailer" placeholder="https://www.youtube.com/embed/...">
-            </div>
-            <div class="form-group">
-                <label>Sinopsis corta:</label>
-                <textarea id="sinopsis" rows="2"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Galería (URLs separadas por coma):</label>
-                <textarea id="images" rows="2" placeholder="img1.jpg, img2.jpg, img3.jpg"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Tiendas (JSON):</label>
-                <textarea id="comprar" rows="4" placeholder='[{"nombre":"Steam","logo":"IMGS/logos/steam.png","link":"https://..."}]'></textarea>
-            </div>
-
-            <button type="submit" class="btn-guardar" id="btn-submit">Agregar Juego</button>
-            <button type="button" id="btn-cancelar" style="display:none;">Cancelar Edición</button>
-        </form>
-
-        <table class="tabla-juegos">
-            <thead>
-                <tr>
-                    <th>Imagen</th>
-                    <th>Título</th>
-                    <th>Año</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="lista-juegos-admin">
-                </tbody>
-        </table>
-    </div>
-<!-- Botón volver a inicio -->
-<a href="salaadmin.html" class="btn-volver" title="Volver al inicio">
-    ⬅
-</a>
-
-    <script>
-        // Lógica de Persistencia (LocalStorage)
-    // ===== JUEGOS BASE (CATÁLOGO ORIGINAL) =====
-const juegosBase = [
-    {
-        title: "Sonic Frontiers",
-        genre: "Action",
-        year: 2022,
-        image: "IMGS/juegos/sonic-frontiers.avif",
-        description: "Explora las Starfall Islands con Sonic.",
-        trailer: "",
-        sinopsis: "Sonic en mundo abierto",
-        images: [],
-        comprar: []
-    },
-    {
-        title: "Sonic Mania",
-        genre: "Plataformas",
-        year: 2017,
-        image: "IMGS/juegos/sonic-mania.avif",
-        description: "El regreso clásico de Sonic.",
-        trailer: "",
-        sinopsis: "",
-        images: [],
-        comprar: []
-    }
-];
-
-
-  // ====== Lista de juegos ======
+// ====== Lista de juegos ======
 const games = [
 { 
     id: "1",
     title: "Sonic Frontiers",
     genre: "Action",
     year: 2022,
-    image: "IMGS/juegos/SONICFRONTIERS.avif",
+    image: "/IMGS/juegos/SONICFRONTIERS.avif",
     trailer: "https://www.youtube.com/embed/F42pHusbeME?si=q8LvpNyYR95nx4Hx",
     description: "La más reciente aventura de Sonic The Hedgehog será un choque entre mundos. Una experiencia como ninguna otra antes, acelera a nuevos niveles y experimenta la emoción y la libertad de la alta velocidad en una zona abierta. Combate contra poderosos enemigos mientras recorres las islas de estrellas fugaces en paisajes llenos de densa vegetación, desbordantes cascadas, sofocantes desiertos, y más. Estas fiestas 2022, viaja a nuevos lugares.",
     sinopsis: "Sonic explora nuevas islas, enfrenta enemigos poderosos y descubre secretos en paisajes asombrosos. Una aventura abierta llena de velocidad y libertad.",
     images: [
-      "IMGS/juegosextras/SONICF1.avif",
-      "IMGS/juegosextras/SONICF2.png",
-      "IMGS/juegosextras/SONICF3.jpg"
+      "/IMGS/juegosextras/SONICF1.avif",
+      "/IMGS/juegosextras/SONICF2.png",
+      "/IMGS/juegosextras/SONICF3.jpg"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
-      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "../IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
     ]
   },
   { 
@@ -165,7 +24,7 @@ const games = [
     title: "Shadow Generations",
     genre: "Action",
     year: 2024,
-    image: "IMGS/juegos/SONICxSHADOW.avif",
+    image: "../IMGS/juegos/SONICxSHADOW.avif",
     trailer: "https://www.youtube.com/embed/DeFcY54XNSA?si=xOGTwbY0jGxLKUON",
     description: `
     <p>Shadow the Hedgehog regresa con Sonic clásico y moderno en SONIC X SHADOW GENERATIONS, ¡una colección completamente nueva que incluye dos experiencias únicas!
@@ -186,13 +45,13 @@ const games = [
     <p>Rescata a Chao, que se esconde en cada nivel, consigue la puntuación más alta en el pinball de la Zona Noches de Casino y visita el museo para ver arte, música y mucho más.</p>`,
     sinopsis: "Shadow the Hedgehog está de regreso con Sonic clásico y moderno en SONIC X SHADOW GENERATIONS, ¡una colección completamente nueva que presenta dos experiencias únicas!",
     images: [
-      "IMGS/juegosextras/SONICS1.jpg",
-      "IMGS/juegosextras/SONICS2.jpg",
-      "IMGS/juegosextras/SONICS3.webp"
+      "../IMGS/juegosextras/SONICS1.jpg",
+      "../IMGS/juegosextras/SONICS2.jpg",
+      "../IMGS/juegosextras/SONICS3.webp"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
-      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/1237320/Sonic_Frontiers/" },
+      { nombre: "Epic Games", logo: "../IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-frontiers" }
     ]
   },
   { 
@@ -200,7 +59,7 @@ const games = [
     title: "Sonic Racing: CrossWorlds",
     genre: "Racing",
     year: 2025,
-    image: "IMGS/juegos/SONICCARRERAS.avif",
+    image: "../IMGS/juegos/SONICCARRERAS.avif",
     trailer: "https://www.youtube.com/embed/MdwpXxYHyI8?si=FYxXZ2ATik6erXyj",
     description: `<p>¡Corre por tierra, mar, aire y espacio en Sonic Racing: CrossWorlds! Usa los Rings de travesía para teletransportarte a dimensiones nuevas donde te esperan novedades en cada curva.</p>
     <p>Acelera hasta la victoria en solitario o con amigos en una gran variedad de modos en línea y sin conexión y compite contra jugadores de todo el mundo. Construye el vehículo definitivo que mejor se adapte a tu estilo de conducción, desbloquea artilugios para obtener ventaja y usa potenciadores para llevarte la victoria a casa.</p>
@@ -210,13 +69,13 @@ const games = [
     <p>Mezcla y combina 45 vehículos originales únicos y 70 artilugios diferentes para mejorar tu vehículo, subir de nivel tu kart y crear la máquina definitiva que se adapte a tu estilo de conducción.</p>`,
     sinopsis: "Corre por tierra, mar, aire, espacio y tiempo en Sonic Racing: CrossWorlds. Viaja a través de los rings de travesía a dimensiones nuevas donde te esperan novedades en cada giro.",
     images: [
-      "IMGS/juegosextras/SONICR1.webp",
-      "IMGS/juegosextras/SONICR2.jpg",
-      "IMGS/juegosextras/SONICR3.webp"
+      "../IMGS/juegosextras/SONICR1.webp",
+      "../IMGS/juegosextras/SONICR2.jpg",
+      "../IMGS/juegosextras/SONICR3.webp"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/2486820/Sonic_Racing_CrossWorlds/" },
-      { nombre: "Epic Games", logo: "IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-racing-crossworlds" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/2486820/Sonic_Racing_CrossWorlds/" },
+      { nombre: "Epic Games", logo: "../IMGS/logos/epic.png", link: "https://store.epicgames.com/es-ES/p/sonic-racing-crossworlds" }
     ]
   },
   { 
@@ -224,7 +83,7 @@ const games = [
     title: "Football Manager 26",
     genre: "Racing",
     year: 2025,
-    image: "IMGS/juegos/FULBO.jpg",
+    image: "../IMGS/juegos/FULBO.jpg",
     trailer: "https://www.youtube.com/embed/rFIuWqlVQis?si=JKDtV9FA6DzpJ_sV",
     description: `<p>Tenemos unos nuevos cimientos que sientan las bases para que definas tu destino futbolístico. Hecho con el motor Unity, FM26 es nuestra esencia de siempre, ahora redefinida y con historias que evolucionan.</p>
     <p>Una interfaz renovada y una experiencia de día de partido más inmersiva que te acercan más a la acción y se combinan para mejorar cada momento determinante del partido.</p>
@@ -233,13 +92,13 @@ const games = [
     <p>Siente la adrenalina de una carrera sorteando adversarios, un milimétrico pase al hueco y un gol inolvidable para conseguir el título en el último suspiro con más personalidad gracias a la nueva captura de movimiento y las animaciones volumétricas.</p>`,
     sinopsis: "Toma las riendas del banquillo y vive el futuro de la gestión futbolística.",
     images: [
-      "IMGS/juegosextras/FM1.webp",
-      "IMGS/juegosextras/FM2.webp",
-      "IMGS/juegosextras/FM3.jpg"
+      "../IMGS/juegosextras/FM1.webp",
+      "../IMGS/juegosextras/FM2.webp",
+      "../IMGS/juegosextras/FM3.jpg"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/3551340/Football_Manager_26/" },
-      { nombre: "Xbox", logo: "IMGS/logos/xbox.png", link: "https://www.xbox.com/es-MX/games/store/football-manager-26/9pd0z90216rj" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/3551340/Football_Manager_26/" },
+      { nombre: "Xbox", logo: "../IMGS/logos/xbox.png", link: "https://www.xbox.com/es-MX/games/store/football-manager-26/9pd0z90216rj" }
     ]
   },
   { 
@@ -247,7 +106,7 @@ const games = [
     title: "Shinobi: Art of Vengeance",
     genre: "Metroidvania",
     year: 2025,
-    image: "IMGS/juegos/NINJA.jpg",
+    image: "../IMGS/juegos/NINJA.jpg",
     trailer: "https://www.youtube.com/embed/TsCDRkmqSmI?si=n5vKKfpTtUwnOMa9",
     description: `<p>El icónico SHINOBI regresa en un renovado nuevo juego de plataformas 2D con una apariencia singular, como si todo hubiese sido dibujado a mano, creado por el equipo detrás del exitoso juego de pelea Streets of Rage 4.</p>
 
@@ -263,13 +122,13 @@ const games = [
 <p>Aventúrate en una gran variedad de niveles visualmente impactantes, desde bases militares hasta desiertos abrasadores, con difíciles rompecabezas de plataforma y secretos ocultos.</p>`,
     sinopsis: "El icónico SHINOBI regresa en un renovado juego de plataformas 2D con una apariencia singular, como si todo hubiese sido dibujado a mano, creado por el equipo detrás del exitoso Streets of Rage 4.",
     images: [
-      "IMGS/juegosextras/SHINOBI1.webp",
-      "IMGS/juegosextras/SHINOBI2.jpg",
-      "IMGS/juegosextras/SHINOBI3.jpg"
+      "../IMGS/juegosextras/SHINOBI1.webp",
+      "../IMGS/juegosextras/SHINOBI2.jpg",
+      "../IMGS/juegosextras/SHINOBI3.jpg"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/2361770/SHINOBI_Art_of_Vengeance/" },
-      { nombre: "Nintendo", logo: "IMGS/logos/nintendo.png", link: "https://www.nintendo.com/es-mx/store/products/shinobi-art-of-vengeance-switch/?srsltid=AfmBOoqgl6bLsgOoYgFsLFuTZikVV0nWcxjoapS4X3p6s7lI-wl4WjZ3" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/2361770/SHINOBI_Art_of_Vengeance/" },
+      { nombre: "Nintendo", logo: "../IMGS/logos/nintendo.png", link: "https://www.nintendo.com/es-mx/store/products/shinobi-art-of-vengeance-switch/?srsltid=AfmBOoqgl6bLsgOoYgFsLFuTZikVV0nWcxjoapS4X3p6s7lI-wl4WjZ3" }
     ]
   },
   { 
@@ -277,7 +136,7 @@ const games = [
     title: "Yakuza Kiwami 2",
     genre: "Action",
     year: 2025,
-    image: "IMGS/juegos/Yakuza2.jpg",
+    image: "../IMGS/juegos/Yakuza2.jpg",
     trailer: "https://www.youtube.com/embed/alkViqNEUdY?si=kYbfBo4aq3Bom8JI",
     description: `<p>Kazuma Kiryu pensaba que sus días en el clan Tojo habían quedado atrás. Él y la joven niña a su cuidado, Haruka Sawamura, construyeron una vida pacífica desde las cenizas del conflicto. Bastó un solo disparo para que esa paz se rompiera en pedazos. Yukio Terada, el quinto líder del clan Tojo, fue asesinado. Con una guerra en el horizonte, el legendario Dragón de Dojima se ve obligado a volver al mundo que había dejado atrás.</p>
 
@@ -296,13 +155,13 @@ const games = [
 <p>Los datos guardados de Yakuza Kiwami 2 (Legacy) no se transfieren a Yakuza Kiwami 2.</p>`,
     sinopsis: "Enfréntate al yakuza más poderoso de la región de Kansai en Japón en un conflicto explosivo entre clanes rivales, cargado de acción de pelea brutal, exploración inmersiva y experiencias inolvidables.",
     images: [
-      "IMGS/juegosextras/YK1.jpg",
-      "IMGS/juegosextras/YK2.png",
-      "IMGS/juegosextras/YK3.jpg"
+      "../IMGS/juegosextras/YK1.jpg",
+      "../IMGS/juegosextras/YK2.png",
+      "../IMGS/juegosextras/YK3.jpg"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/3717340/Yakuza_Kiwami_2/" },
-      { nombre: "Nintendo", logo: "IMGS/logos/nintendo.png", link: "https://www.nintendo.com/es-mx/store/products/yakuza-kiwami-2-switch-2/?srsltid=AfmBOoqIA8JUQkNoXEj4tZ2ch2VpwkP2E1JIw_8r54fH2Oas2VdgtE2t" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/3717340/Yakuza_Kiwami_2/" },
+      { nombre: "Nintendo", logo: "../IMGS/logos/nintendo.png", link: "https://www.nintendo.com/es-mx/store/products/yakuza-kiwami-2-switch-2/?srsltid=AfmBOoqIA8JUQkNoXEj4tZ2ch2VpwkP2E1JIw_8r54fH2Oas2VdgtE2t" }
     ]
   },
   { 
@@ -310,7 +169,7 @@ const games = [
     title: "Yakuza Kiwami 3 & Dark Ties",
     genre: "Action",
     year: 2026,
-    image: "IMGS/juegos/Yakuza3.jpg",
+    image: "../IMGS/juegos/Yakuza3.jpg",
     trailer: "https://www.youtube.com/embed/xjagCJf_x1s?si=ejVO_AA28LvC1XO1",
     description: `<p>Continúa la historia de Kazuma Kiryu mientras lucha por proteger a quienes más ama en una versión completamente renovada de Yakuza 3 que mejora nuestro querido juego en todos sus aspectos.</p>
     <p>Las bulliciosas calles de Okinawa y Tokio cobran vida con un nivel de detalle impresionante, y el sistema de combate renovado ofrece brutales peleas que llevan la acción al siguiente nivel. Además, se agregan escenas que aportan más profundidad y emotividad a esta atrapante historia, experiencias secundarias nuevas y mejoradas que te sumergen en este mundo como nunca antes, y mucho más.</p>
@@ -318,13 +177,13 @@ const games = [
     <p>Dos hombres recorrerán caminos distintos que luego convergerán para sacudir los mismísimos cimientos del destino.</p>`,
     sinopsis: "YAKUZA KIWAMI 3 es un remake extremo del juego de acción y aventura beat 'em up Yakuza 3, que sigue la lucha del ex-yakuza Kazuma Kiryu por proteger a quienes ama. DARK TIES es un juego totalmente nuevo que presenta a Yoshitaka Mine, incluido como una experiencia independiente llena de acción.",
     images: [
-      "IMGS/juegosextras/YKYDT1.jpg",
-      "IMGS/juegosextras/YKYDT2.webp",
-      "IMGS/juegosextras/YKYDT3.jpg"
+      "../IMGS/juegosextras/YKYDT1.jpg",
+      "../IMGS/juegosextras/YKYDT2.webp",
+      "../IMGS/juegosextras/YKYDT3.jpg"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/3937550/Yakuza_Kiwami_3__Dark_Ties/" },
-      { nombre: "Xbox", logo: "IMGS/logos/xbox.png", link: "https://www.xbox.com/es-MX/games/store/yakuza-kiwami-3-dark-ties/9PL8B0T091SZ" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/3937550/Yakuza_Kiwami_3__Dark_Ties/" },
+      { nombre: "Xbox", logo: "../IMGS/logos/xbox.png", link: "https://www.xbox.com/es-MX/games/store/yakuza-kiwami-3-dark-ties/9PL8B0T091SZ" }
     ]
   },
   { 
@@ -332,7 +191,7 @@ const games = [
     title: "Persona 4 Revival",
     genre: "Rol",
     year: 2026,
-    image: "IMGS/juegos/Persona4Revival.jpg",
+    image: "../IMGS/juegos/Persona4Revival.jpg",
     trailer: "https://www.youtube.com/embed/Y8wgp9eaQRM?si=RK4LSDjCUYowOVzo",
     description: `<p>Persona 4 Revival une la investigación de una serie de asesinatos con un viaje de autodescubrimiento y encuentros con lo oculto dentro de una experiencia RPG clásica aclamada por la crítica que vuelve con nueva vida.</p>
 
@@ -349,13 +208,13 @@ const games = [
 <p>Descubre lugares hermosos y conoce a personajes cautivadores: Cielos despejados, riberas con atardeceres fantásticos, calles brillantes en días de lluvia... los paisajes de Inaba cobran vida con gráficas modernas. Forja lazos sociales y crea vínculos con lugareños a través de una historia fascinante e interacciones inmersivas. Cuanto más estrechos sean tus vínculos, más interesante será tu historia.</p>`,
     sinopsis: "Te espera un año inolvidable con nuevos amigos. Pero los rumores sobre extraños asesinatos y un canal de televisión misterioso alteran tu paz y abren una puerta a otro mundo.",
     images: [
-      "IMGS/juegosextras/PERSONA1.jpg",
-      "IMGS/juegosextras/PERSONA2.png",
-      "IMGS/juegosextras/PERSONA3.webp"
+      "../IMGS/juegosextras/PERSONA1.jpg",
+      "../IMGS/juegosextras/PERSONA2.png",
+      "../IMGS/juegosextras/PERSONA3.webp"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/2963950/Persona_4_Revival/https://store.steampowered.com/app/2963950/Persona_4_Revival/" },
-      { nombre: "Playstation", logo: "IMGS/logos/play.png", link: "https://store.playstation.com/es-es/concept/10011107" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/2963950/Persona_4_Revival/https://store.steampowered.com/app/2963950/Persona_4_Revival/" },
+      { nombre: "Playstation", logo: "../IMGS/logos/play.png", link: "https://store.playstation.com/es-es/concept/10011107" }
     ]
   },
   { 
@@ -363,7 +222,7 @@ const games = [
     title: "Persona 5: The Phantom X",
     genre: "Rol",
     year: 2025,
-    image: "IMGS/juegos/Persona5elfantasmadeX.jpg",
+    image: "../IMGS/juegos/Persona5elfantasmadeX.jpg",
     trailer: "https://www.youtube.com/embed/5btk2fzbRjQ?si=RLTqTmQ5SzS3xYco",
     description: `<p>¡Somos los Ladrones Fantasma y estamos aquí para robarte el corazón!</p>
 <p>¡La querida serie de RPG, con más de 27 millones de copias vendidas, finalmente llega a PC y móviles!</p>
@@ -382,13 +241,13 @@ const games = [
 <p>P5X incluye un montón de personajes originales, todos creados bajo la supervisión de Shigenori Soejima y el resto del equipo de Persona.</p>`,
     sinopsis: "¡Somos los Ladrones Fantasma y estamos aquí para robarte el corazón! La querida serie de RPG, con más de 27 millones de copias vendidas, ¡por fin llega a PC y móviles!",
     images: [
-      "IMGS/juegosextras/PERSONATFX1.webp",
-      "IMGS/juegosextras/PERSONATFX2.jpg",
-      "IMGS/juegosextras/PERSONATFX3.jpg"
+      "../IMGS/juegosextras/PERSONATFX1.webp",
+      "../IMGS/juegosextras/PERSONATFX2.jpg",
+      "../IMGS/juegosextras/PERSONATFX3.jpg"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/3061570/Persona5_The_Phantom_X/" },
-      { nombre: "Play Store", logo: "IMGS/logos/playstore.png", link: "https://play.google.com/store/apps/details?id=com.sega.persona5.the.phantomx.en&pli=1" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/3061570/Persona5_The_Phantom_X/" },
+      { nombre: "Play Store", logo: "../IMGS/logos/playstore.png", link: "https://play.google.com/store/apps/details?id=com.sega.persona5.the.phantomx.en&pli=1" }
     ]
   },
   { 
@@ -396,7 +255,7 @@ const games = [
     title: "Two Point Museum",
     genre: "Crafting",
     year: 2025,
-    image: "IMGS/juegos/Museum.jpg",
+    image: "../IMGS/juegos/Museum.jpg",
     trailer: "https://www.youtube.com/embed/2oTdIywJbh0?si=V6iu-6do5mfMwOY4",
     description: `<p>Como curadores noveles, tienen la tarea de diseñar y perfeccionar sus propios museos para crear la experiencia definitiva para sus visitantes. Coordinen a los Expertos en expediciones remotas para descubrir nuevas Exposiciones, generando expectación para atraer a multitudes de visitantes ávidos de conocimiento que esperan información y entretenimiento de primer nivel para quedar impresionados. Todo esto mientras mantienen sus Exposiciones seguras, las salas limpias, el personal contento... ¡y a los niños lejos de los huesos de dinosaurios!</p>
 
@@ -415,187 +274,222 @@ const games = [
 <p>El condado de Two Point atraerá a una variedad de visitantes a tu museo, y todos esperan descubrir su nueva exhibición favorita. Desde fanáticos de los dinosaurios y aficionados a la botánica hasta amantes de las películas de terror, tendrás que satisfacer sus preferencias personales para satisfacer sus necesidades. Al superar sus expectativas, puedes mantenerlos interesados, lo que se traduce en visitas más largas, más donaciones y excelentes reseñas.</p>`,
     sinopsis: "¡Cura y gestiona museos increíbles! Explora para descubrir artefactos asombrosos. Diseña y perfecciona la distribución, mantén al personal contento, a los visitantes entretenidos, recibe abundantes donaciones... y a los niños alejados de las exhibiciones.",
     images: [
-      "IMGS/juegosextras/MUSEO1.jpg",
-      "IMGS/juegosextras/MUSEO2.webp",
-      "IMGS/juegosextras/MUSEO3.webp"
+      "../IMGS/juegosextras/MUSEO1.jpg",
+      "../IMGS/juegosextras/MUSEO2.webp",
+      "../IMGS/juegosextras/MUSEO3.webp"
     ],
     comprar: [
-      { nombre: "Steam", logo: "IMGS/logos/steam.png", link: "https://store.steampowered.com/app/2185060/Two_Point_Museum/" },
-      { nombre: "Xbox", logo: "IMGS/logos/xbox.png", link: "https://www.xbox.com/es-MX/games/store/two-point-museum/9NFHRF1M4W3Z" }
+      { nombre: "Steam", logo: "../IMGS/logos/steam.png", link: "https://store.steampowered.com/app/2185060/Two_Point_Museum/" },
+      { nombre: "Xbox", logo: "../IMGS/logos/xbox.png", link: "https://www.xbox.com/es-MX/games/store/two-point-museum/9NFHRF1M4W3Z" }
     ]
   }
 ];
+// ====== Cargar juegos del editor (localStorage) ======
+let storedGames = [];
+try {
+  storedGames = JSON.parse(localStorage.getItem("juegos_sega")) || [];
+} catch {
+  storedGames = [];
+}
 
-  // ===== CARGA + SEED =====
-  let juegos = JSON.parse(localStorage.getItem("juegos_sega"));
+// ====== Combinar juegos base + editor ======
+const allGames = [...games];
 
-  if (!juegos || juegos.length === 0) {
-      juegos = games.map(juego => ({
-          ...juego,
-          id: juego.id || (Date.now().toString() + Math.random().toString(16).slice(2))
-      }));
-      localStorage.setItem("juegos_sega", JSON.stringify(juegos));
+// Agregar los que NO existen en games
+storedGames.forEach(stored => {
+  const exists = allGames.some(g => String(g.id) === String(stored.id));
+  if (!exists) {
+    allGames.push(stored);
+  }
+});
+
+
+// ====== Obtener ID del juego desde la URL ======
+const params = new URLSearchParams(window.location.search);
+const gameId = params.get("id");
+
+// ====== Elementos del DOM ======
+const titleEl = document.getElementById("game-title");
+const genreEl = document.getElementById("game-genre");
+const yearEl = document.getElementById("game-year");
+const imageEl = document.getElementById("game-image");
+const trailerContainer = document.getElementById("game-trailer-container");
+const descEl = document.getElementById("game-description");
+
+// ====== Función para cargar juego ======
+function loadGame() {
+  if (!gameId) {
+    titleEl.textContent = "Selecciona un juego desde la página principal";
+    genreEl.textContent = "-";
+    yearEl.textContent = "-";
+    imageEl.src = "../IMGS/juegos/default.jpg";
+    imageEl.alt = "Sin selección";
+    trailerContainer.innerHTML = "<p>No hay tráiler disponible.</p>";
+    descEl.innerHTML = "<p>Información no disponible.</p>";
+    return;
   }
 
+  const staticGame = allGames.find(g => String(g.id) === String(gameId));
 
 
-
-
-        const form = document.getElementById("form-juego");
-        const lista = document.getElementById("lista-juegos-admin");
-
-        function guardar() {
-            localStorage.setItem("juegos_sega", JSON.stringify(juegos));
-            render();
-        }
-
-        function render() {
-            lista.innerHTML = "";
-            juegos.forEach(juego => {
-                lista.innerHTML += `
-                    <tr>
-                        <td><img src="${juego.image}" width="50" onerror="this.onerror=null;this.src='IMGS/juegos/SINIMGS.png'"></td>
-                        <td>${juego.title}</td>
-                        <td>${juego.year}</td>
-                        <td>
-                            <button class="btn-edit" onclick="prepararEdicion('${juego.id}')">Editar</button>
-                            <button class="btn-del" onclick="eliminarJuego('${juego.id}')">Eliminar</button>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        form.onsubmit = (e) => {
-            e.preventDefault();
-            const id = document.getElementById("edit-id").value || Date.now().toString();
-            const nuevoJuego = {
-                id: id,
-                title: document.getElementById("title").value,
-                genre: document.getElementById("genre").value,
-                year: Number(document.getElementById("year").value),
-                image: document.getElementById("image").value.trim() || "IMGS/juegos/SINIMGS.png", // <-- FIX
-                description: document.getElementById("description").value,
-
-
-                trailer: document.getElementById("trailer").value,
-                sinopsis: document.getElementById("sinopsis").value,
-                images: document.getElementById("images").value
-                    .split(",")
-                    .map(img => img.trim())
-                    .filter(img => img !== ""),
-
-                comprar: (() => {
-                    try {
-                        return JSON.parse(document.getElementById("comprar").value || "[]");
-                    } catch {
-                        alert("Error en el formato JSON de Tiendas");
-                        return [];
-                    }
-                })()
-            };
-
-            const index = juegos.findIndex(j => j.id === id);
-            if (index !== -1) juegos[index] = nuevoJuego;
-            else juegos.push(nuevoJuego);
-
-            guardar();
-            form.reset();
-            document.getElementById("edit-id").value = "";
-            document.getElementById("btn-submit").innerText = "Agregar Juego";
-        };
-
-
-        window.eliminarJuego = (id) => {
-            juegos = juegos.filter(j => j.id !== id);
-            guardar();
-        };
-
-        window.prepararEdicion = (id) => {
-            const juego = juegos.find(j => j.id === id);
-            document.getElementById("edit-id").value = juego.id;
-            document.getElementById("title").value = juego.title;
-            document.getElementById("genre").value = juego.genre;
-            document.getElementById("year").value = juego.year;
-            document.getElementById("image").value = juego.image;
-            document.getElementById("description").value = juego.description;
-            document.getElementById("btn-submit").innerText = "Actualizar Juego";
-            document.getElementById("trailer").value = juego.trailer || "";
-            document.getElementById("sinopsis").value = juego.sinopsis || "";
-            document.getElementById("images").value = (juego.images || []).join(", ");
-            document.getElementById("comprar").value = JSON.stringify(juego.comprar || [], null, 2);
-
-        };
-
-        render();
-    </script>
-  <script>
-    // Menu hamburguesa
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navbar = document.querySelector('.navbar');
-    menuToggle.addEventListener('click', () => {
-      navbar.classList.toggle('active');
-    });
-  </script>
-<script>
-  // Verificamos si hay usuario logueado y si es admin
-  let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
-
-  function verificarAdmin() {
-      loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
-      if (!loggedUser || loggedUser.role !== "admin") {
-          alert("Acceso denegado. Solo administradores pueden entrar.");
-          window.location.href = "login.html";
+  // Merge any overrides saved from the editor (localStorage key 'juegos_sega')
+  let game = staticGame;
+  try {
+    const stored = JSON.parse(localStorage.getItem('juegos_sega') || '[]');
+    if (Array.isArray(stored)) {
+      const override = stored.find(s => String(s.id) === String(gameId));
+      if (override) {
+        // If there is a static game, copy its fields then overwrite with override.
+        game = Object.assign({}, staticGame || {}, override);
+      } else if (!staticGame) {
+        // If no static game but an entry exists in storage with that id, use it
+        const storedOnly = stored.find(s => String(s.id) === String(gameId));
+        if (storedOnly) game = Object.assign({}, storedOnly);
       }
+    }
+  } catch (e) {
+    console.warn('No se pudo leer localStorage para overrides de juegos', e);
   }
 
-  // Llamamos al inicio
-  verificarAdmin();
+  if (!game) {
+    titleEl.textContent = "Juego no encontrado";
+    genreEl.textContent = "-";
+    yearEl.textContent = "-";
+    imageEl.src = "../IMGS/juegos/default.jpg";
+    imageEl.alt = "Juego no encontrado";
+    trailerContainer.innerHTML = "<p>No hay tráiler disponible.</p>";
+    descEl.innerHTML = "<p>Información no disponible.</p>";
+  } else {
+    titleEl.textContent = game.title;
+    genreEl.textContent = game.genre || '-';
+    yearEl.textContent = game.year || '-';
+    imageEl.src = game.image || '../IMGS/juegos/default.jpg';
+    imageEl.alt = game.title || '';
 
-  /* ===== Botón sesión ===== */
-  const loginBtn = document.getElementById("login-btn");
-  const dropdown = document.getElementById("user-dropdown");
-  const logoutBtn = document.getElementById("logout-btn");
-  const switchBtn = document.getElementById("switch-btn");
+    // ====== Tráiler ======
+    if (game.trailer) {
+      trailerContainer.innerHTML = `
+        <iframe 
+          src="${game.trailer}" 
+          title="Tráiler de ${game.title}" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+          style="position: absolute; top:0; left:0; width:100%; height:100%; border-radius:10px;"></iframe>
+      `;
+    } else {
+      trailerContainer.innerHTML = "<p>No hay tráiler disponible.</p>";
+    }
 
-  /* ===== ESTADO SIN USUARIO ===== */
-  if (!loggedUser) {
-      loginBtn.textContent = "Iniciar sesión";
-      loginBtn.addEventListener("click", () => {
-          window.location.href = "login.html";
-      });
-  } 
-  /* ===== ESTADO CON USUARIO ===== */
-  else {
-      loginBtn.textContent = loggedUser.username;
+    // ====== Información ======
+    descEl.innerHTML = game.description || "<p>Información no disponible.</p>";
 
-      loginBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          dropdown.classList.toggle("hidden");
-      });
+// ====== Contenedor derecho (image + sinopsis + galería + comprar) ======
+const rightColumn = imageEl.parentElement; // asumiendo que imageEl está dentro de la columna derecha
 
-      // Cerrar sesión → redirige si ya no es admin
-      logoutBtn.addEventListener("click", () => {
-          localStorage.removeItem("loggedUser");
-          dropdown.classList.add("hidden");
-          loginBtn.textContent = "Iniciar sesión";
+// Limpiamos elementos anteriores (opcional si recargas)
+const existingContainers = rightColumn.querySelectorAll("#game-sinopsis, #game-gallery, #game-comprar");
+existingContainers.forEach(el => el.remove());
 
-          // Redirigimos al login automáticamente
-          window.location.href = "login.html";
-      });
+// ====== Sinopsis ======
+if (game.sinopsis) {
+  const sinopsisContainer = document.createElement("p");
+  sinopsisContainer.id = "game-sinopsis";
+  sinopsisContainer.style.margin = "15px 0";
+  sinopsisContainer.style.fontStyle = "italic";
+  sinopsisContainer.textContent = game.sinopsis;
+  rightColumn.appendChild(sinopsisContainer); // agregado primero
+}
 
-      // Cambiar usuario → redirige a login
-      switchBtn.addEventListener("click", () => {
-          localStorage.removeItem("loggedUser");
-          window.location.href = "login.html";
-      });
-  }
+// ====== Galería ======
+if (game.images && game.images.length) {
+  const galleryContainer = document.createElement("div");
+  galleryContainer.id = "game-gallery";
+  galleryContainer.style.display = "flex";
+  galleryContainer.style.flexDirection = "column";
+  galleryContainer.style.alignItems = "center";
+  galleryContainer.style.gap = "10px";
+  galleryContainer.style.marginTop = "10px";
 
-  // Click fuera cierra menú
-  document.addEventListener("click", () => {
-      dropdown.classList.add("hidden");
+  game.images.forEach(imgSrc => {
+    const img = document.createElement("img");
+    img.src = imgSrc;
+    img.style.width = "100%";
+    img.style.maxWidth = "300px";
+    img.style.height = "200px";
+    img.style.objectFit = "cover";
+    img.style.borderRadius = "8px";
+    img.style.boxShadow = "0 2px 6px rgba(0,0,0,0.5)";
+    galleryContainer.appendChild(img);
   });
-</script>
 
-</body>
-</html>
+  rightColumn.appendChild(galleryContainer); // agregado después de la sinopsis
+}
+
+// ====== Sección Comprar ======
+if (game.comprar && game.comprar.length) {
+  const comprarContainer = document.createElement("div");
+  comprarContainer.id = "game-comprar";
+  comprarContainer.style.display = "flex";
+  comprarContainer.style.flexWrap = "wrap";
+  comprarContainer.style.justifyContent = "center";
+  comprarContainer.style.gap = "10px";
+  comprarContainer.style.marginTop = "15px";
+
+  game.comprar.forEach(store => {
+    const a = document.createElement("a");
+    a.href = store.link;
+    a.target = "_blank";
+    a.style.display = "inline-block";
+    a.style.padding = "5px 15px";
+    a.style.backgroundColor = "rgba(0,0,0,0.3)";
+    a.style.borderRadius = "10px";
+    a.style.boxShadow = "0 2px 6px rgba(0,0,0,0.5)";
+    a.style.transition = "0.3s";
+    a.style.textDecoration = "none";
+
+    a.onmouseover = () => a.style.transform = "scale(1.05)";
+    a.onmouseout = () => a.style.transform = "scale(1)";
+
+    const img = document.createElement("img");
+    img.src = store.logo;
+    img.alt = store.nombre;
+    img.style.height = "40px";
+    img.style.width = "auto";
+
+    a.appendChild(img);
+    comprarContainer.appendChild(a);
+  });
+
+  rightColumn.appendChild(comprarContainer); // abajo de la galería
+}
+
+  }
+}
+
+// ===== Agregar juegos nuevos desde localStorage ======
+// 1. Buscamos si hay juegos nuevos guardados por el editor
+const juegosNuevos = JSON.parse(localStorage.getItem("juegos_sega")) || [];
+
+// 2. Si encontramos juegos nuevos, los metemos a la lista actual
+juegosNuevos.forEach(nuevoJuego => {
+    // Revisamos si el juego ya existe para no duplicarlo
+    const existe = games.find(g => g.id === nuevoJuego.id);
+    if (!existe) {
+        games.push(nuevoJuego);
+    } else {
+        // Si ya existe (porque lo editaste), actualizamos los datos
+        Object.assign(existe, nuevoJuego);
+    }
+});
+
+// 3. Volvemos a ejecutar la función que dibuja los juegos en pantalla
+// Solo si estamos en la página de sega.html
+if (typeof renderGames === 'function' && document.getElementById("juegos-container")) {
+    renderGames(); 
+}
+
+
+
+// ====== Ejecutar ======
+loadGame();

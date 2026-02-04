@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEGA Login | Sonic Access</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="sonic-login">
+
+    <div class="login-container">
+        <a href="../index.html" class="logo-link">
+            <img src="../IMGS/SEGALOGO2.png" alt="SEGA Logo" class="sega-logo">
+        </a>
+        <h2 class="sonic-subtitle">Sonic Access System</h2>
+
+        <form id="login-form">
+
+            <div class="input-group">
+                <label>PLAYER ID</label>
+                <input type="text" name="username" placeholder="Ej. sonic" required>
+            </div>
+            
+            <div class="input-group">
+                <label>CHAOS CODE</label>
+                <input type="password" name="password" placeholder="rings123" required>
+            </div>
+            
+            <button type="submit" class="start-btn">▶ PRESS START</button>
+
+        </form>
+
+        <div class="footer">
+            © SEGA UNIVERSE | DGM17076 PROJECT <br>
+            Powered by Speed ⚡🦔
+        </div>
+    </div>
+
+    <script src="users.js"></script>
+    <script>
+    document.getElementById("login-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const username = e.target.username.value.trim();
+        const password = e.target.password.value.trim();
+        const user = users.find(u => u.username === username && u.password === password);
+        if (user) {
+            // Guardamos usuario en localStorage
+            localStorage.setItem("loggedUser", JSON.stringify(user));
+            if (user.role === "admin") {
+                // Admin puede ir a toda la página
+                window.location.href = "../ACT_2/salaadmin.html";
+            } else {
+                // User normal solo puede ir a sega.html
+                window.location.href = "../index.html";
+            }
+        } else {
+            alert("Usuario o contraseña incorrectos");
+        }
+        });
+        </script>
+
+</body>
+</html>

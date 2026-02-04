@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalles del Juego</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="game-body">
 
   <!-- Header -->
   <header class="header-game">
     <div class="menu sega">
-      <a href="index.html" class="logo">
-        <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA">
+      <a href="../index.html" class="logo">
+        <img src="../IMGS/SEGALOGO2.png" alt="Logo SEGA">
       </a>
 
       <div class="menu-toggle">☰</div>
@@ -26,10 +26,10 @@
               <button id="switch-btn">Cambiar usuario</button>
             </div>
           </li>
-          <li><a href="index.html#inicio">Inicio</a></li>
-          <li><a href="index.html#juegos">Juegos</a></li>
-          <li><a href="index.html#info">Información</a></li>
-          <li><a href="index.html#contacto">Contacto</a></li>
+          <li><a href="../index.html#inicio">Inicio</a></li>
+          <li><a href="../index.html#juegos">Juegos</a></li>
+          <li><a href="../index.html#info">Información</a></li>
+          <li><a href="../index.html#contacto">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -61,7 +61,7 @@
 
       <!-- Derecha: Imagen + Género + Año -->
       <div class="game-right" style="flex: 0 0 350px; text-align:center;">
-        <img id="game-image" src="IMGS/juegos/SINIMGS.png" alt="Juego" style="max-width:100%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.4); margin-bottom: 15px;" onerror="this.onerror=null;this.src='IMGS/juegos/SINIMGS.png'">
+        <img id="game-image" src="../IMGS/juegos/SINIMGS.png" alt="Juego" style="max-width:100%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.4); margin-bottom: 15px;" onerror="this.onerror=null;this.src='../IMGS/juegos/SINIMGS.png'">
 
         <p><strong>Género:</strong> <span id="game-genre">-</span></p>
         <p><strong>Año:</strong> <span id="game-year">-</span></p>
@@ -71,11 +71,11 @@
   </main>
 
   <!-- Botón volver -->
-  <a href="index.html" class="btn-volver" title="Volver al inicio">⬅</a>
+  <a href="../index.html#juegos" class="btn-volver" title="Volver al inicio">⬅</a>
 
   <!-- Footer -->
   <footer class="footer">
-    <img src="IMGS/SEGALOGO2.png" alt="Logo SEGA">
+    <img src="../IMGS/SEGALOGO2.png" alt="Logo SEGA">
     <div class="links">
       <a href="https://www.facebook.com/SEGA/?locale=es_LA" target="_blank">Facebook</a>
       <a href="https://www.instagram.com/sega/reels/" target="_blank">Instagram</a>
@@ -109,7 +109,8 @@ if (!loggedUser) {
     loginBtn.textContent = "Iniciar sesión";
 
     loginBtn.addEventListener("click", () => {
-        window.location.href = "login.html";
+        window.location.href = "../AVANCPROYECTO/login.html";
+
     });
 
 } 
@@ -130,14 +131,16 @@ else {
 
         // Cambia comportamiento del botón
         loginBtn.onclick = () => {
-            window.location.href = "login.html";
+            window.location.href = "../AVANCPROYECTO/login.html";
+
         };
     });
 
     // Cambiar usuario → SÍ redirige
     switchBtn.addEventListener("click", () => {
         localStorage.removeItem("loggedUser");
-        window.location.href = "login.html";
+        window.location.href = "../AVANCPROYECTO/login.html";
+
     });
 }
 

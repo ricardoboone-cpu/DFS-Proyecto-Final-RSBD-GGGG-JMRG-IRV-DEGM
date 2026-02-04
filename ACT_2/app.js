@@ -2,7 +2,8 @@
 const btnEditor = document.getElementById("ir-editor");
 if (btnEditor) {
     btnEditor.addEventListener("click", () => {
-        window.location.href = "editorjuegos.html";
+        window.location.href = "../AVANCPROYECTO/editorjuegos.html";
+
     });
 }
 
